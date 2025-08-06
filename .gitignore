@@ -1,66 +1,65 @@
-# =========================
-# Unity Git Ignore (Strict)
-# Only track: Assets/, Packages/, ProjectSettings/
-# =========================
+# Ignore everything in the Unity project EXCEPT 3 key folders
+/CSCI356 Unity Game/*
+!/CSCI356 Unity Game/Assets/
+!/CSCI356 Unity Game/Packages/
+!/CSCI356 Unity Game/ProjectSettings/
 
-# Ignore everything by default
-/*
-# Except the key Unity folders
-!Assets/
-!Packages/
-!ProjectSettings/
+# Unity .gitignore (apply to subfolder)
+# This assumes Unity project is inside "CSCI356 Unity Game"
 
-# Inside Assets/, ignore JetBrains and store tools if desired
-Assets/Plugins/Editor/JetBrains*
-Assets/AssetStoreTools*
+# Cache and build data
+/CSCI356 Unity Game/[Ll]ibrary/
+/CSCI356 Unity Game/[Tt]emp/
+/CSCI356 Unity Game/[Oo]bj/
+/CSCI356 Unity Game/[Bb]uild/
+/CSCI356 Unity Game/[Bb]uilds/
+/CSCI356 Unity Game/[Ll]ogs/
+/CSCI356 Unity Game/[Uu]ser[Ss]ettings/
+/CSCI356 Unity Game/*.log
 
-# Ignore generated & cache folders
-[Ll]ibrary/
-[Tt]emp/
-[Oo]bj/
-[Bb]uild/
-[Bb]uilds/
-[Ll]ogs/
-[Uu]ser[Ss]ettings/
-[Mm]emoryCaptures/
-[Rr]ecordings/
+/CSCI356 Unity Game/[Mm]emoryCaptures/
+/CSCI356 Unity Game/[Rr]ecordings/
 
-# Ignore local dev & editor files
-*.log
-.vs/
-.gradle/
-ExportedObj/
-.consulo/
-*.csproj
-*.unityproj
-*.sln
-*.suo
-*.tmp
-*.user
-*.userprefs
-*.pidb
-*.booproj
-*.svd
-*.pdb
-*.mdb
-*.opendb
-*.VC.db
-sysinfo.txt
+/CSCI356 Unity Game/Assets/Plugins/Editor/JetBrains*
 
-# Unity package & platform-specific outputs
-*.apk
-*.aab
-*.unitypackage
-*.unitypackage.meta
-*.app
-crashlytics-build.properties
+/CSCI356 Unity Game/.vs/
+/CSCI356 Unity Game/.gradle/
 
-# Addressables & StreamingAssets
-Assets/AddressableAssetsData/*/*.bin*
-Assets/StreamingAssets/aa.meta
-Assets/StreamingAssets/aa/*
+# Solution/project files
+/CSCI356 Unity Game/ExportedObj/
+/CSCI356 Unity Game/.consulo/
+/CSCI356 Unity Game/*.csproj
+/CSCI356 Unity Game/*.unityproj
+/CSCI356 Unity Game/*.sln
+/CSCI356 Unity Game/*.suo
+/CSCI356 Unity Game/*.tmp
+/CSCI356 Unity Game/*.user
+/CSCI356 Unity Game/*.userprefs
+/CSCI356 Unity Game/*.pidb
+/CSCI356 Unity Game/*.booproj
+/CSCI356 Unity Game/*.svd
+/CSCI356 Unity Game/*.pdb
+/CSCI356 Unity Game/*.mdb
+/CSCI356 Unity Game/*.opendb
+/CSCI356 Unity Game/*.VC.db
 
-# Ignore meta files for ignored binaries
-*.pidb.meta
-*.pdb.meta
-*.mdb.meta
+# Meta files
+/CSCI356 Unity Game/*.pidb.meta
+/CSCI356 Unity Game/*.pdb.meta
+/CSCI356 Unity Game/*.mdb.meta
+
+# Crash/system
+/CSCI356 Unity Game/sysinfo.txt
+
+# Output
+/CSCI356 Unity Game/*.apk
+/CSCI356 Unity Game/*.aab
+/CSCI356 Unity Game/*.unitypackage
+/CSCI356 Unity Game/*.unitypackage.meta
+/CSCI356 Unity Game/*.app
+/CSCI356 Unity Game/crashlytics-build.properties
+
+# Addressables
+/CSCI356 Unity Game/Assets/AddressableAssetsData/*/*.bin*
+/CSCI356 Unity Game/Assets/StreamingAssets/aa.meta
+/CSCI356 Unity Game/Assets/StreamingAssets/aa/*
