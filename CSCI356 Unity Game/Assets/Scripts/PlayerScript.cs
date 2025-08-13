@@ -9,11 +9,6 @@ public class PlayerMovement : MonoBehaviour
     public float groundCheckDistance = 0.4f;
     public LayerMask groundMask;
     
-    [Header("Mouse Look Settings")]
-    public float mouseSensitivity = 100f;
-    public Transform playerCamera; // Assign your camera here
-    public float xRotationLimit = 80f; // Prevents over-rotation up/down
-    
     [Header("Sprint Settings")]
     public bool isSprinting = false;
     public float maxStamina = 100f;
@@ -27,7 +22,7 @@ public class PlayerMovement : MonoBehaviour
     private bool isGrounded;
     private float currentSpeed;
     private float currentStamina;
-    private float xRotation = 0f; // For camera up/down rotation
+
     
     public Transform groundCheck; // Assign this in the Inspector
     
@@ -39,56 +34,10 @@ public class PlayerMovement : MonoBehaviour
             Debug.LogError("No CharacterController attached to the player!");
         }
         
-        // Find camera if not assigned - prioritize child camera
-        if (playerCamera == null)
-        {
-            // First try to find camera as a child
-            playerCamera = GetComponentInChildren<Camera>()?.transform;
-            
-            // If no child camera, try main camera
-            if (playerCamera == null)
-            {
-                playerCamera = Camera.main?.transform;
-                if (playerCamera != null)
-                {
-                    Debug.LogWarning("Using Camera.main - consider making camera a child of player for better FPS control");
-                }
-            }
-            
-            if (playerCamera == null)
-            {
-                Debug.LogError("No camera found! Please assign a camera or make sure you have a Camera component.");
-                return;
-            }
-        }
-        
-        // Ensure camera starts with no rotation relative to player
-        if (playerCamera.parent == transform)
-        {
-            playerCamera.localRotation = Quaternion.identity;
-            xRotation = 0f;
-        }
-        
-        currentSpeed = moveSpeed;
-        currentStamina = maxStamina; // Start with full stamina
-        
-        // Lock cursor to center of screen
-        Cursor.lockState = CursorLockMode.Locked;
     }
     
     void Update()
     {
-        // --- Cursor Control (check first) ---
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            ToggleCursor();
-        }
-        
-        // --- Mouse Look (only when cursor is locked) ---
-        if (Cursor.lockState == CursorLockMode.Locked)
-        {
-            HandleMouseLook();
-        }
         
         // --- Sprint Input ---
         if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift))
@@ -119,36 +68,7 @@ public class PlayerMovement : MonoBehaviour
         controller.Move(velocity * Time.deltaTime);
     }
     
-    void HandleMouseLook()
-    {
-        if (playerCamera == null || Cursor.lockState != CursorLockMode.Locked) return;
-        
-        // Get mouse movement
-        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
-        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
-        
-        // Rotate player body left/right (Y-axis)
-        transform.Rotate(Vector3.up * mouseX);
-        
-        // Rotate camera up/down (X-axis) - since camera is child, only rotate locally
-        xRotation -= mouseY;
-        xRotation = Mathf.Clamp(xRotation, -xRotationLimit, xRotationLimit);
-        playerCamera.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
-    }
     
-    void ToggleCursor()
-    {
-        if (Cursor.lockState == CursorLockMode.Locked)
-        {
-            Cursor.lockState = CursorLockMode.None;
-            Debug.Log("Cursor Unlocked - Press ESC again to lock");
-        }
-        else
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-            Debug.Log("Cursor Locked");
-        }
-    }
     
     void ToggleSprint()
     {
