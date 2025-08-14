@@ -6,14 +6,11 @@ public class DeathScreenUI : MonoBehaviour
     public void RestartGame()
     {
         // Reload the current scene
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene("SampleScene");
 
         // Find the player and reset it (after scene loads)
-        PlayerMovement player = FindObjectOfType<PlayerMovement>();
-        if (player != null)
-        {
+        PlayerMovement player = FindAnyObjectByType<PlayerMovement>();
             player.ResetPlayer();
-        }
     }
 
     public void QuitGame()
