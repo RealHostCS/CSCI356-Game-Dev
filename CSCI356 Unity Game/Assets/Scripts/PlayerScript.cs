@@ -113,7 +113,7 @@ public class PlayerMovement : MonoBehaviour
             currentStamina += staminaRechargeRate * Time.deltaTime;
             currentStamina = Mathf.Clamp(currentStamina, 0f, maxStamina);
         }
-        Debug.Log("Current Stamina: " + currentStamina + " / " + maxStamina + " (" + GetStaminaPercentage() + "%)");
+        //Debug.Log("Current Stamina: " + currentStamina + " / " + maxStamina + " (" + GetStaminaPercentage() + "%)");
     }
     
     // Optional: Method to get stamina percentage for UI
