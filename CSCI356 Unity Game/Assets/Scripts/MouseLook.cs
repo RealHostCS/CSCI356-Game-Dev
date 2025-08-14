@@ -31,7 +31,11 @@ public class MouseLook : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
+        //lock Mouse
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false; 
+
         // make the rigid body not change rotation
         Rigidbody body = GetComponent<Rigidbody>();
         if (body != null)

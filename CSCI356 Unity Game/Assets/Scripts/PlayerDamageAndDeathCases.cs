@@ -16,6 +16,7 @@ public class PlayerDamageAndDeathCases : MonoBehaviour
     {
         if (other.CompareTag("Monster"))
         {
+            Debug.Log("You died");
             ShowDeathScreen();
         }
     }
