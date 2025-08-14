@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,7 +16,7 @@ public class MouseLook : MonoBehaviour
     // rotation axis
     public RotationAxes axes = RotationAxes.MouseX;
 
-   
+
 
     // rotation sensitivity
     public float sensitivityHor = 9.0f;
@@ -35,7 +36,7 @@ public class MouseLook : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        
+
         // make the rigid body not change rotation
         Rigidbody body = GetComponent<Rigidbody>();
         if (body != null)
@@ -81,4 +82,5 @@ public class MouseLook : MonoBehaviour
             transform.localEulerAngles = new Vector3(verticalRot, horizontalRot, 0);
         }
     }
+
 }
