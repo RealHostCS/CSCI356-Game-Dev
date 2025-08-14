@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 3
   tags:
   - Monster
+  - Pause
+  - PauseMain
   layers:
   - Default
   - TransparentFX
