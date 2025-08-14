@@ -36,6 +36,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
+        Time.timeScale = 1f;
         velocity = Vector3.zero;
         currentStamina = maxStamina;
     }
