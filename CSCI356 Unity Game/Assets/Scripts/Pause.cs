@@ -7,8 +7,9 @@ public class Pause : MonoBehaviour
     public GameObject Audio;
     public GameObject Visual;
     public GameObject Random;
-
     public GameObject StaminaBar;
+
+    public GameObject freezeCam;
     private bool isPaused = false;
 
     void Start()
@@ -36,6 +37,8 @@ public class Pause : MonoBehaviour
 
     public void PauseGame()
     {
+        Debug.Log("Pause Screen Called");
+        freezeCam.SetActive(false);
         StaminaBar.SetActive(false);
         PauseScreen.SetActive(true);
         Time.timeScale = 0f; // Stop time
@@ -44,6 +47,7 @@ public class Pause : MonoBehaviour
 
     public void ResumeGame()
     {
+        freezeCam.SetActive(true);
         PauseScreen.SetActive(false);
         StaminaBar.SetActive(true);
         Time.timeScale = 1f; // Resume time

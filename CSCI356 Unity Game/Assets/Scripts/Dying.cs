@@ -3,6 +3,7 @@ using UnityEngine;
 public class Dying : MonoBehaviour
 {
     public GameObject deathScreenUI; // Assign in inspector
+    public GameObject sprintBar;
 
     private void Start()
     {
@@ -33,6 +34,7 @@ public class Dying : MonoBehaviour
     {
         Debug.Log("yeah you got caught");
         deathScreenUI.SetActive(true);
+        sprintBar.SetActive(false);
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
