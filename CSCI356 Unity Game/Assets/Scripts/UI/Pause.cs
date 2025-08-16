@@ -8,20 +8,12 @@ public class Pause : MonoBehaviour
     public GameObject[] additionalUI; // Any other UI panels you want to manage
 
     [Header("Other References")]
-    public GameObject freezeCam; // Camera object that has the mouse look script
+    public MonoBehaviour mouseLookScript; // Assign MouseLook script directly in inspector
 
     private bool isPaused = false;
-    private MonoBehaviour mouseLookScript; // Reference to the script controlling mouse look
 
     void Start()
     {
-        // Cache the first MonoBehaviour attached to freezeCam (or assign in inspector)
-        if (freezeCam != null)
-        {
-            // Grab whichever script you’ve placed there (e.g. MouseLook)
-            mouseLookScript = freezeCam.GetComponent<MonoBehaviour>();
-        }
-
         // Hide all UI elements on start
         if (PauseScreen != null)
             PauseScreen.SetActive(false);
