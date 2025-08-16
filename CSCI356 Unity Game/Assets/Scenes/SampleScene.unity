@@ -205,7 +205,6 @@ GameObject:
   - component: {fileID: 51907084}
   - component: {fileID: 51907086}
   - component: {fileID: 51907085}
-  - component: {fileID: 51907087}
   m_Layer: 5
   m_Name: ControlsPanel
   m_TagString: Untagged
@@ -275,24 +274,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 51907083}
   m_CullTransparentMesh: 1
---- !u!114 &51907087
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 51907083}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad1d087f413017a45b0499c9c5b2fc8e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PauseScreen: {fileID: 1710066315}
-  Controls: {fileID: 51907083}
-  Audio: {fileID: 1038918950}
-  Visual: {fileID: 1282922409}
-  Random: {fileID: 1518652702}
-  StaminaBar: {fileID: 1890289167}
 --- !u!1 &137724114
 GameObject:
   m_ObjectHideFlags: 0
@@ -305,6 +286,7 @@ GameObject:
   - component: {fileID: 137724118}
   - component: {fileID: 137724117}
   - component: {fileID: 137724116}
+  - component: {fileID: 137724119}
   m_Layer: 0
   m_Name: UICamera
   m_TagString: Untagged
@@ -430,6 +412,18 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!114 &137724119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 137724114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 932147cf0703d164c81b6d25389f5ba7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &273512817
 GameObject:
   m_ObjectHideFlags: 0
@@ -575,6 +569,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 300431999}
+  - component: {fileID: 300432000}
   m_Layer: 0
   m_Name: UI
   m_TagString: Untagged
@@ -601,6 +596,26 @@ Transform:
   - {fileID: 1734537270}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &300432000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 300431998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad1d087f413017a45b0499c9c5b2fc8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PauseScreen: {fileID: 1710066315}
+  StaminaBar: {fileID: 1890289167}
+  additionalUI:
+  - {fileID: 51907083}
+  - {fileID: 1038918950}
+  - {fileID: 1518652702}
+  - {fileID: 1282922409}
+  freezeCam: {fileID: 658636718}
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -613,7 +628,6 @@ GameObject:
   - component: {fileID: 330585545}
   - component: {fileID: 330585544}
   - component: {fileID: 330585547}
-  - component: {fileID: 330585548}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -741,23 +755,6 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
---- !u!114 &330585548
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 330585543}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8e0fcf01902b2e48b1fbe8ff06c385a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  axes: 2
-  sensitivityHor: 7
-  sensitivityVert: 7
-  minimumVert: -45
-  maximumVert: 45
 --- !u!1 &357201393
 GameObject:
   m_ObjectHideFlags: 0
@@ -2085,7 +2082,6 @@ GameObject:
   - component: {fileID: 658636725}
   - component: {fileID: 658636726}
   - component: {fileID: 658636727}
-  - component: {fileID: 658636728}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -2296,25 +2292,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2901e7a27a4947346886c7304cda4f72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathScreenUI: {fileID: 1344458040}
---- !u!114 &658636728
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 658636718}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad1d087f413017a45b0499c9c5b2fc8e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PauseScreen: {fileID: 1710066315}
-  Controls: {fileID: 51907083}
-  Audio: {fileID: 1038918950}
-  Visual: {fileID: 1282922409}
-  Random: {fileID: 1518652702}
-  StaminaBar: {fileID: 1890289167}
+  deathScreenUI: {fileID: 1455439181}
+  sprintBar: {fileID: 1890289167}
 --- !u!1 &689594286
 GameObject:
   m_ObjectHideFlags: 0
@@ -3400,7 +3379,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 51907087}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Pause, Assembly-CSharp
         m_MethodName: OpenControls
         m_Mode: 1
@@ -4564,8 +4543,9 @@ GameObject:
   - component: {fileID: 1344458042}
   - component: {fileID: 1344458041}
   - component: {fileID: 1344458045}
+  - component: {fileID: 1344458046}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: DeathScreenP
   m_TagString: Respawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4666,6 +4646,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 932147cf0703d164c81b6d25389f5ba7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1344458046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1344458040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2901e7a27a4947346886c7304cda4f72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deathScreenUI: {fileID: 1455439181}
+  sprintBar: {fileID: 1890289167}
 --- !u!1 &1401805997
 GameObject:
   m_ObjectHideFlags: 0
@@ -4678,6 +4672,7 @@ GameObject:
   - component: {fileID: 1401806001}
   - component: {fileID: 1401806000}
   - component: {fileID: 1401805999}
+  - component: {fileID: 1401806002}
   m_Layer: 5
   m_Name: UnselectedButton3
   m_TagString: Untagged
@@ -4787,6 +4782,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1401805997}
   m_CullTransparentMesh: 1
+--- !u!114 &1401806002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1401805997}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad1d087f413017a45b0499c9c5b2fc8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PauseScreen: {fileID: 0}
+  StaminaBar: {fileID: 0}
+  additionalUI: []
+  freezeCam: {fileID: 0}
 --- !u!1 &1440741800
 GameObject:
   m_ObjectHideFlags: 0
@@ -4873,6 +4884,7 @@ GameObject:
   - component: {fileID: 1455439182}
   - component: {fileID: 1455439184}
   - component: {fileID: 1455439183}
+  - component: {fileID: 1455439185}
   m_Layer: 5
   m_Name: DeathScreen
   m_TagString: Untagged
@@ -4939,6 +4951,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1455439181}
   m_CullTransparentMesh: 1
+--- !u!114 &1455439185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1455439181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 932147cf0703d164c81b6d25389f5ba7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1468695517
 GameObject:
   m_ObjectHideFlags: 0

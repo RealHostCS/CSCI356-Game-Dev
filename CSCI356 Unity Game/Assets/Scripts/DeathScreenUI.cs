@@ -1,8 +1,10 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
 public class DeathScreenUI : MonoBehaviour
 {
+    private MonoBehaviour mouseLookScript; 
     public void RestartGame()
     {
         // Reload the current scene
@@ -10,11 +12,12 @@ public class DeathScreenUI : MonoBehaviour
 
         // Find the player and reset it (after scene loads)
         PlayerMovement player = FindAnyObjectByType<PlayerMovement>();
-            player.ResetPlayer();
+        player.ResetPlayer();
     }
 
     public void QuitGame()
     {
+        
         // Quit the game (works in build, not in editor)
         Application.Quit();
         Debug.Log("Quit Game");
