@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
@@ -7,11 +8,10 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        // Singleton pattern to make sure there's only one GameManager
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject); // Persist between scene loads
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -19,26 +19,55 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Restarts the current scene and resets the player after reload.
-    /// </summary>
     public void RestartGame()
     {
-        // Reload the active scene
+        // Subscribe to sceneLoaded
         SceneManager.sceneLoaded += OnSceneLoaded;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        // Unsubscribe immediately so this only runs once
+        // Unsubscribe immediately
         SceneManager.sceneLoaded -= OnSceneLoaded;
 
-        // Find the player and reset them
-        PlayerMovement player = FindAnyObjectByType<PlayerMovement>();
-        if (player != null)
+        // Use coroutine to wait one frame before resetting
+        StartCoroutine(ResetPlayerNextFrame());
+    }
+
+    private IEnumerator ResetPlayerNextFrame()
+    {
+        yield return null; // Wait one frame
+
+        // Reset PlayerMovement
+        PlayerMovement playerMovement = FindAnyObjectByType<PlayerMovement>();
+        if (playerMovement != null)
         {
-            player.ResetPlayer();
+            playerMovement.ResetPlayer();
+            playerMovement.enabled = true;
         }
+
+        // Reset PlayerAttributes
+        PlayerAttributes playerAttributes = FindAnyObjectByType<PlayerAttributes>();
+        if (playerAttributes != null)
+        {
+            playerAttributes.health = 100;
+            playerAttributes.isDead = false;
+        }
+
+        // Reset Dying UI
+        Dying dyingUI = FindAnyObjectByType<Dying>();
+        if (dyingUI != null)
+        {
+            if (dyingUI.deathScreenUI != null)
+                dyingUI.deathScreenUI.SetActive(false);
+            if (dyingUI.sprintBar != null)
+                dyingUI.sprintBar.SetActive(true);
+        }
+
+        // Resume game time and cursor
+        Time.timeScale = 1f;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 }

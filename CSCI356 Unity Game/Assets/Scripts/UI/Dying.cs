@@ -4,22 +4,15 @@ using UnityEngine.SceneManagement;
 public class Dying : MonoBehaviour
 {
     [Header("UI References")]
-    public GameObject deathScreenUI; // Assign in inspector
-    public GameObject sprintBar;     // Assign in inspector
+    public GameObject deathScreenUI;
+    public GameObject sprintBar;
 
-    private void Start()
-    {
-        // Hide death screen at start
-        if (deathScreenUI != null)
-            deathScreenUI.SetActive(false);
-
-        if (sprintBar != null)
-            sprintBar.SetActive(true);
-    }
+    private PlayerAttributes attributes;
+    private GameManager gameManager;
+    private PlayerContactLogic monster;
 
     private void OnEnable()
     {
-        // Listen for scene load to refresh references
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
@@ -28,52 +21,94 @@ public class Dying : MonoBehaviour
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    private void Start()
     {
-        // Re-find UI objects in the newly loaded scene if they are missing
-        if (deathScreenUI == null)
-            deathScreenUI = GameObject.Find("DeathScreenUI"); // Use exact name in scene
+        // Find GameManager and player references
+        gameManager = FindAnyObjectByType<GameManager>();
+        attributes = FindAnyObjectByType<PlayerAttributes>();
+        monster = FindAnyObjectByType<PlayerContactLogic>();
 
-        if (sprintBar == null)
-            sprintBar = GameObject.Find("StaminaBar"); // Use exact name in scene
-
-        // Ensure UI is hidden after reload
         if (deathScreenUI != null)
             deathScreenUI.SetActive(false);
-
         if (sprintBar != null)
             sprintBar.SetActive(true);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void Update()
     {
-        if (collision.gameObject.CompareTag("Monster"))
+        if (monster != null && monster.playerColision && attributes != null && attributes.health <= 0)
         {
             ShowDeathScreen();
         }
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Monster"))
-        {
-            ShowDeathScreen();
-        }
-    }
-
-    private void ShowDeathScreen()
+    public void ShowDeathScreen()
     {
         if (deathScreenUI != null)
             deathScreenUI.SetActive(true);
-
         if (sprintBar != null)
             sprintBar.SetActive(false);
 
-        // Stop game
+        // Stop the game
         Time.timeScale = 0f;
-
-        // Unlock cursor for UI
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+
+        // Disable player movement
+        if (attributes != null)
+        {
+            PlayerMovement movement = attributes.GetComponent<PlayerMovement>();
+            if (movement != null)
+                movement.enabled = false;
+        }
+    }
+
+    public void RestartGame()
+    {
+        Debug.Log("Restart Log");
+        if (gameManager != null)
+            gameManager.RestartGame();
+        else
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        gameObject.SetActive(false);
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
+    // Called automatically after scene loads
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // Re-find player & monster
+        attributes = FindAnyObjectByType<PlayerAttributes>();
+        monster = FindAnyObjectByType<PlayerContactLogic>();
+
+        // Reset player
+        if (attributes != null)
+        {
+            attributes.health = 100;
+            attributes.isDead = false;
+
+            PlayerMovement movement = attributes.GetComponent<PlayerMovement>();
+            if (movement != null)
+                movement.enabled = true;
+        }
+
+        // Reset UI
+        if (deathScreenUI != null)
+            deathScreenUI.SetActive(false);
+        if (sprintBar != null)
+            sprintBar.SetActive(true);
+
+        // Resume time
+        Time.timeScale = 1f;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
+        // Reset monster collision flag
+        if (monster != null)
+            monster.playerColision = false;
     }
 }
