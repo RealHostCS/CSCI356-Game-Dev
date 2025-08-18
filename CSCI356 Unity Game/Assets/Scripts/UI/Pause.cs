@@ -14,12 +14,10 @@ public class Pause : MonoBehaviour
 
     void Start()
     {
-        // Hide all UI elements on start
-        if (PauseScreen != null)
-            PauseScreen.SetActive(false);
-
-        if (StaminaBar != null)
-            StaminaBar.SetActive(true);
+        
+        PauseScreen.SetActive(false);
+        
+        StaminaBar.SetActive(true);
 
         if (additionalUI != null)
         {
