@@ -558,6 +558,7 @@ GameObject:
   - component: {fileID: 300431999}
   - component: {fileID: 300432000}
   - component: {fileID: 300432001}
+  - component: {fileID: 300432002}
   m_Layer: 0
   m_Name: UI
   m_TagString: Untagged
@@ -619,6 +620,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deathScreenUI: {fileID: 1344458040}
   sprintBar: {fileID: 1890289167}
+--- !u!114 &300432002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 300431998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad1d087f413017a45b0499c9c5b2fc8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PauseScreen: {fileID: 1734537266}
+  StaminaBar: {fileID: 1890289167}
+  additionalUI: []
+  mouseLookScript: {fileID: 0}
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -2016,6 +2033,7 @@ GameObject:
   - component: {fileID: 658636725}
   - component: {fileID: 658636726}
   - component: {fileID: 658636728}
+  - component: {fileID: 658636729}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -2133,7 +2151,7 @@ Transform:
   m_GameObject: {fileID: 658636718}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -20.5, y: 4.33, z: -28}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2228,6 +2246,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   isDead: 0
+--- !u!114 &658636729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 658636718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 151ec95990bc2cb428f6af1a0548118a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashlight: {fileID: 1254860067}
 --- !u!1 &689594286
 GameObject:
   m_ObjectHideFlags: 0
