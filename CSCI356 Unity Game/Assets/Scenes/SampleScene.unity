@@ -558,6 +558,7 @@ GameObject:
   - component: {fileID: 300431999}
   - component: {fileID: 300432000}
   - component: {fileID: 300432001}
+  - component: {fileID: 300432002}
   m_Layer: 0
   m_Name: UI
   m_TagString: Untagged
@@ -619,6 +620,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deathScreenUI: {fileID: 1344458040}
   sprintBar: {fileID: 1890289167}
+--- !u!114 &300432002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 300431998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad1d087f413017a45b0499c9c5b2fc8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PauseScreen: {fileID: 1734537266}
+  StaminaBar: {fileID: 1890289167}
+  additionalUI: []
+  mouseLookScript: {fileID: 0}
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
