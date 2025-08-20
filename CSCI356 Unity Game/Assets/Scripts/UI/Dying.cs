@@ -28,10 +28,8 @@ public class Dying : MonoBehaviour
         attributes = FindAnyObjectByType<PlayerAttributes>();
         monster = FindAnyObjectByType<PlayerContactLogic>();
 
-        if (deathScreenUI != null)
-            deathScreenUI.SetActive(false);
-        if (sprintBar != null)
-            sprintBar.SetActive(true);
+        deathScreenUI.SetActive(false);
+        sprintBar.SetActive(true);
     }
 
     private void Update()
@@ -44,10 +42,10 @@ public class Dying : MonoBehaviour
 
     public void ShowDeathScreen()
     {
-        if (deathScreenUI != null)
-            deathScreenUI.SetActive(true);
-        if (sprintBar != null)
-            sprintBar.SetActive(false);
+    
+        deathScreenUI.SetActive(true);
+
+        sprintBar.SetActive(false);
 
         // Stop the game
         Time.timeScale = 0f;
@@ -97,10 +95,8 @@ public class Dying : MonoBehaviour
         }
 
         // Reset UI
-        if (deathScreenUI != null)
-            deathScreenUI.SetActive(false);
-        if (sprintBar != null)
-            sprintBar.SetActive(true);
+        deathScreenUI.SetActive(false);
+        sprintBar.SetActive(true);
 
         // Resume time
         Time.timeScale = 1f;
@@ -108,7 +104,6 @@ public class Dying : MonoBehaviour
         Cursor.visible = false;
 
         // Reset monster collision flag
-        if (monster != null)
-            monster.playerColision = false;
+        monster.playerColision = false;
     }
 }
