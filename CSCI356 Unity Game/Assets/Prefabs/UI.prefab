@@ -672,7 +672,6 @@ GameObject:
   - component: {fileID: 3650678387409502845}
   - component: {fileID: 5409554632627518464}
   - component: {fileID: 145293436637293323}
-  - component: {fileID: 103953577434454504}
   m_Layer: 0
   m_Name: UI
   m_TagString: Untagged
@@ -734,22 +733,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deathScreenUI: {fileID: 7697834477502300989}
   sprintBar: {fileID: 8883110264699287464}
---- !u!114 &103953577434454504
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1291838147001243563}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad1d087f413017a45b0499c9c5b2fc8e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PauseScreen: {fileID: 4630091945658998118}
-  StaminaBar: {fileID: 8883110264699287464}
-  additionalUI: []
-  mouseLookScript: {fileID: 0}
 --- !u!1 &1317148443221363885
 GameObject:
   m_ObjectHideFlags: 0
