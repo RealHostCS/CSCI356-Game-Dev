@@ -3,21 +3,22 @@ using UnityEngine;
 public class Pause : MonoBehaviour
 {
     [Header("UI References")]
-    public GameObject PauseScreen;
-    public GameObject StaminaBar;
-    public GameObject[] additionalUI; // Any other UI panels you want to manage
+    public GameObject PauseScreen;       // Main pause menu panel
+    public GameObject StaminaBar;        // Stamina UI
+    public GameObject[] additionalUI;    // Other UI panels (inventory, settings, etc.)
 
     [Header("Other References")]
-    public MonoBehaviour mouseLookScript; // Assign MouseLook script directly in inspector
+    public MonoBehaviour mouseLookScript; // Assign your MouseLook script in inspector
 
     private bool isPaused = false;
 
     void Start()
     {
-        
-        PauseScreen.SetActive(false);
-        
-        StaminaBar.SetActive(true);
+        if (PauseScreen != null)
+            PauseScreen.SetActive(false);
+
+        if (StaminaBar != null)
+            StaminaBar.SetActive(true);
 
         if (additionalUI != null)
         {
@@ -28,12 +29,11 @@ public class Pause : MonoBehaviour
             }
         }
 
-        Time.timeScale = 1f; // Ensure game runs normally
+        Time.timeScale = 1f; // Ensure game starts unpaused
     }
 
     void Update()
     {
-        // Toggle pause with ESC
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (isPaused)
@@ -45,7 +45,8 @@ public class Pause : MonoBehaviour
 
     public void PauseGame()
     {
-        // Disable mouse look instead of disabling camera
+        Debug.Log("Pause triggered!"); // ✅ Helps confirm it's running
+
         if (mouseLookScript != null)
             mouseLookScript.enabled = false;
 
@@ -53,19 +54,24 @@ public class Pause : MonoBehaviour
             StaminaBar.SetActive(false);
 
         if (PauseScreen != null)
+        {
             PauseScreen.SetActive(true);
 
-        Time.timeScale = 0f; // Stop game
+            // If it has an Animator, make sure it updates even when Time.timeScale = 0
+            Animator anim = PauseScreen.GetComponent<Animator>();
+            if (anim != null)
+                anim.updateMode = AnimatorUpdateMode.UnscaledTime;
+        }
+
+        Time.timeScale = 0f;
         isPaused = true;
 
-        // Unlock cursor for UI interaction
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
 
     public void ResumeGame()
     {
-        // Re-enable mouse look
         if (mouseLookScript != null)
             mouseLookScript.enabled = true;
 
@@ -75,7 +81,6 @@ public class Pause : MonoBehaviour
         if (StaminaBar != null)
             StaminaBar.SetActive(true);
 
-        // Hide all additional UI panels
         if (additionalUI != null)
         {
             foreach (GameObject ui in additionalUI)
@@ -85,20 +90,17 @@ public class Pause : MonoBehaviour
             }
         }
 
-        Time.timeScale = 1f; // Resume game
+        Time.timeScale = 1f;
         isPaused = false;
 
-        // Lock cursor again
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
 
-    // UNIVERSAL method to open any UI object
     public void OpenUI(GameObject uiToOpen)
     {
         if (uiToOpen != null)
         {
-            // Hide main pause screen and all other UI panels
             if (PauseScreen != null)
                 PauseScreen.SetActive(false);
 
@@ -111,7 +113,6 @@ public class Pause : MonoBehaviour
                 }
             }
 
-            // Show the chosen UI
             uiToOpen.SetActive(true);
         }
     }

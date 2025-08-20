@@ -717,7 +717,6 @@ MonoBehaviour:
   - {fileID: 4695925269151850198}
   - {fileID: 5407093129803467582}
   - {fileID: 6623363177605486789}
-  - {fileID: 4630091945658998118}
   mouseLookScript: {fileID: 0}
 --- !u!114 &145293436637293323
 MonoBehaviour:

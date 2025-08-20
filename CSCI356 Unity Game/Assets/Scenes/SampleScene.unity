@@ -924,7 +924,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3650678387409502845, guid: 17d734598d0a91c4db069b8f88e75ed7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 165
       objectReference: {fileID: 0}
     - target: {fileID: 3650678387409502845, guid: 17d734598d0a91c4db069b8f88e75ed7, type: 3}
       propertyPath: m_LocalRotation.w
@@ -962,6 +962,10 @@ PrefabInstance:
       propertyPath: mouseLookScript
       value: 
       objectReference: {fileID: 658636724}
+    - target: {fileID: 5409554632627518464, guid: 17d734598d0a91c4db069b8f88e75ed7, type: 3}
+      propertyPath: additionalUI.Array.size
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 5806499683381739889, guid: 17d734598d0a91c4db069b8f88e75ed7, type: 3}
       propertyPath: playerMovement
       value: 
@@ -985,6 +989,10 @@ PrefabInstance:
     - target: {fileID: 7969048079011678015, guid: 17d734598d0a91c4db069b8f88e75ed7, type: 3}
       propertyPath: m_AnchorMin.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8454247401717127475, guid: 17d734598d0a91c4db069b8f88e75ed7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 19
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
