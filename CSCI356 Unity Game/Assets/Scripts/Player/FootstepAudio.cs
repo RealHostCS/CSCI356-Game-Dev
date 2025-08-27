@@ -43,8 +43,5 @@ public class FootstepAudio : MonoBehaviour
         }
 
         lastPosition = transform.position;
-
-        //Debug
-        Debug.Log(speed);
     }
 }
