@@ -16,12 +16,6 @@ public class PlayerMovement : MonoBehaviour
     public float groundCheckDistance = 0.4f;
     public LayerMask groundMask;
 
-    [Header("Sliding Settings")]
-    [Tooltip("Layer assigned to slippery surfaces")]
-    public LayerMask iceLayer;
-    [Tooltip("How much momentum is gained from ice")]
-    public float iceSlideFactor = 5f;
-
     [Header("Sprint & Stamina Settings")]
     public float maxStamina = 100f;
     public float staminaDrainRate = 25f;
@@ -30,7 +24,6 @@ public class PlayerMovement : MonoBehaviour
 
     private CharacterController controller;
     private Vector3 velocity;
-    private Vector3 slideVelocity;
     private bool isSprinting;
     private float currentStamina;
 
@@ -44,7 +37,6 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         velocity = Vector3.zero;
-        slideVelocity = Vector3.zero;
         currentStamina = maxStamina;
     }
 
@@ -57,49 +49,31 @@ public class PlayerMovement : MonoBehaviour
 
     #region Movement
 
-    public void AddSlide(Vector3 direction, float strength)
-    {
-        // Add momentum in a frame-independent way
-        slideVelocity += direction.normalized * strength * Time.deltaTime;
-    }
-
     private void HandleMovement()
-{
-    // Input
-    float horizontal = Input.GetAxis("Horizontal");
-    float vertical = Input.GetAxis("Vertical");
-    Vector3 inputDir = transform.right * horizontal + transform.forward * vertical;
-    inputDir = inputDir.normalized;
-
-    float speed = isSprinting ? sprintSpeed : moveSpeed;
-
-    // Check if on ice
-    bool onIce = Physics.CheckSphere(groundCheck.position, groundCheckDistance, iceLayer);
-
-    if (onIce)
     {
-        // Instead of instantly applying input, blend it with current slide velocity
-        Vector3 targetVelocity = inputDir * speed;
-        slideVelocity = Vector3.Lerp(slideVelocity, targetVelocity, Time.deltaTime * 2f); // 2f = turning smoothness
+        // Get raw input for instant response
+        float horizontal = Input.GetAxisRaw("Horizontal");
+        float vertical = Input.GetAxisRaw("Vertical");
+
+        Vector3 inputDir = (transform.right * horizontal + transform.forward * vertical).normalized;
+
+        // Determine current speed
+        float speed = isSprinting ? sprintSpeed : moveSpeed;
+
+        // Apply movement instantly (no slipping)
+        Vector3 move = inputDir * speed;
+
+        // Gravity
+        if (controller.isGrounded && velocity.y < 0f)
+            velocity.y = -2f; // Small downward force to stay grounded
+
+        velocity.y += gravity * Time.deltaTime;
+
+        // Combine horizontal movement with vertical velocity
+        Vector3 finalMove = move + new Vector3(0, velocity.y, 0);
+
+        controller.Move(finalMove * Time.deltaTime);
     }
-    else
-    {
-        // Normal movement off ice
-        slideVelocity = Vector3.Lerp(slideVelocity, inputDir * speed, Time.deltaTime * 10f);
-    }
-
-    // Gravity
-    if (controller.isGrounded && velocity.y < 0f)
-        velocity.y = -2f;
-
-    velocity.y += gravity * Time.deltaTime;
-
-    // Combine sliding and gravity
-    Vector3 totalMove = slideVelocity + new Vector3(0, velocity.y, 0);
-
-    controller.Move(totalMove * Time.deltaTime);
-}
-
 
     #endregion
 
@@ -107,10 +81,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleSprintInput()
     {
-        if ((Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) && currentStamina >= minStaminaToSprint)
-            isSprinting = true;
-        else
-            isSprinting = false;
+        isSprinting = (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) && currentStamina >= minStaminaToSprint;
     }
 
     private void HandleStamina()
@@ -126,8 +97,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            currentStamina += staminaRechargeRate * Time.deltaTime;
-            currentStamina = Mathf.Clamp(currentStamina, 0f, maxStamina);
+            currentStamina = Mathf.Clamp(currentStamina + staminaRechargeRate * Time.deltaTime, 0f, maxStamina);
         }
     }
 
@@ -140,7 +110,6 @@ public class PlayerMovement : MonoBehaviour
     public void ResetPlayer()
     {
         velocity = Vector3.zero;
-        slideVelocity = Vector3.zero;
         isSprinting = false;
         currentStamina = maxStamina;
 
