@@ -22,4 +22,10 @@ public class MonsterStats : MonoBehaviour
     {
         
     }
+    
+    //Temporary stun function to test camera raycasting
+    public void Stun()
+    {
+        Debug.Log("Monster was stunned by camera");
+    }
 }
