@@ -16,37 +16,33 @@ public class PlayerMovement : MonoBehaviour
     public float groundCheckDistance = 0.4f;
     public LayerMask groundMask;
 
-    private Vector3 slideVelocity;
-
-
-    [Header("Sprint & Stamina Settings")]
-    public float maxStamina = 100f;
-    public float staminaDrainRate = 25f; // Stamina per second while sprinting
-    public float staminaRechargeRate = 10f; // Stamina per second when not sprinting
-    public float minStaminaToSprint = 10f;
-
     [Header("Sliding Settings")]
     [Tooltip("Layer assigned to slippery surfaces")]
     public LayerMask iceLayer;
     [Tooltip("How much momentum is gained from ice")]
     public float iceSlideFactor = 5f;
 
+    [Header("Sprint & Stamina Settings")]
+    public float maxStamina = 100f;
+    public float staminaDrainRate = 25f;
+    public float staminaRechargeRate = 10f;
+    public float minStaminaToSprint = 10f;
+
     private CharacterController controller;
     private Vector3 velocity;
-    
-    private bool isSprinting = false;
+    private Vector3 slideVelocity;
+    private bool isSprinting;
     private float currentStamina;
 
     void Awake()
     {
         controller = GetComponent<CharacterController>();
-        if (controller == null)
+        if (!controller)
             Debug.LogError("PlayerMovement requires a CharacterController!");
     }
 
     void Start()
     {
-        Time.timeScale = 1f;
         velocity = Vector3.zero;
         slideVelocity = Vector3.zero;
         currentStamina = maxStamina;
@@ -54,56 +50,56 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        HandleMovement();
         HandleSprintInput();
         HandleStamina();
+        HandleMovement();
     }
 
     #region Movement
 
-    // Allows external scripts (like Ice) to add sliding momentum
     public void AddSlide(Vector3 direction, float strength)
     {
-        slideVelocity += direction * strength * Time.deltaTime;
-        }
-
+        // Add momentum in a frame-independent way
+        slideVelocity += direction.normalized * strength * Time.deltaTime;
+    }
 
     private void HandleMovement()
+{
+    // Input
+    float horizontal = Input.GetAxis("Horizontal");
+    float vertical = Input.GetAxis("Vertical");
+    Vector3 inputDir = transform.right * horizontal + transform.forward * vertical;
+    inputDir = inputDir.normalized;
+
+    float speed = isSprinting ? sprintSpeed : moveSpeed;
+
+    // Check if on ice
+    bool onIce = Physics.CheckSphere(groundCheck.position, groundCheckDistance, iceLayer);
+
+    if (onIce)
     {
-        // Input
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
-        Vector3 move = transform.right * horizontal + transform.forward * vertical;
-
-        float speed = isSprinting ? sprintSpeed : moveSpeed;
-
-        // Check if on ice
-        bool onIce = Physics.CheckSphere(groundCheck.position, groundCheckDistance, iceLayer);
-
-        // Apply ice sliding
-        if (onIce)
-        {
-            slideVelocity += move * iceSlideFactor * Time.deltaTime;
-        }
-        else
-        {
-            // Decay sliding when not on ice
-            slideVelocity = Vector3.Lerp(slideVelocity, Vector3.zero, Time.deltaTime * 5f);
-        }
-
-        // Combine normal movement and sliding
-        Vector3 totalMove = move * speed + slideVelocity;
-
-        // Gravity
-        if (controller.isGrounded && velocity.y < 0f)
-            velocity.y = -2f;
-
-        velocity.y += gravity * Time.deltaTime;
-        totalMove += new Vector3(0, velocity.y, 0);
-
-        // Move the CharacterController
-        controller.Move(totalMove * Time.deltaTime);
+        // Instead of instantly applying input, blend it with current slide velocity
+        Vector3 targetVelocity = inputDir * speed;
+        slideVelocity = Vector3.Lerp(slideVelocity, targetVelocity, Time.deltaTime * 2f); // 2f = turning smoothness
     }
+    else
+    {
+        // Normal movement off ice
+        slideVelocity = Vector3.Lerp(slideVelocity, inputDir * speed, Time.deltaTime * 10f);
+    }
+
+    // Gravity
+    if (controller.isGrounded && velocity.y < 0f)
+        velocity.y = -2f;
+
+    velocity.y += gravity * Time.deltaTime;
+
+    // Combine sliding and gravity
+    Vector3 totalMove = slideVelocity + new Vector3(0, velocity.y, 0);
+
+    controller.Move(totalMove * Time.deltaTime);
+}
+
 
     #endregion
 
@@ -111,9 +107,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleSprintInput()
     {
-        if ((Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift)) && currentStamina >= minStaminaToSprint)
+        if ((Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) && currentStamina >= minStaminaToSprint)
             isSprinting = true;
-        else if (Input.GetKeyUp(KeyCode.LeftShift) || Input.GetKeyUp(KeyCode.RightShift) || currentStamina <= 0f)
+        else
             isSprinting = false;
     }
 
@@ -135,10 +131,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    public float GetStaminaPercentage()
-    {
-        return currentStamina / maxStamina;
-    }
+    public float GetStaminaPercentage() => currentStamina / maxStamina;
 
     #endregion
 
@@ -151,7 +144,7 @@ public class PlayerMovement : MonoBehaviour
         isSprinting = false;
         currentStamina = maxStamina;
 
-        if (spawnPoint != null)
+        if (spawnPoint)
             transform.position = spawnPoint.position;
 
         controller.enabled = false;
