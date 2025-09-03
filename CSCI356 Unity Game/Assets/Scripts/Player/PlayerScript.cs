@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovementWithIce : MonoBehaviour
 {
     [Header("Spawn Settings")]
     public Transform spawnPoint;
@@ -22,8 +22,15 @@ public class PlayerMovement : MonoBehaviour
     public float staminaRechargeRate = 10f; // Stamina per second when not sprinting
     public float minStaminaToSprint = 10f;
 
+    [Header("Sliding Settings")]
+    [Tooltip("Layer assigned to slippery surfaces")]
+    public LayerMask iceLayer;
+    [Tooltip("How much momentum is gained from ice")]
+    public float iceSlideFactor = 5f;
+
     private CharacterController controller;
     private Vector3 velocity;
+    private Vector3 slideVelocity;
     private bool isSprinting = false;
     private float currentStamina;
 
@@ -38,6 +45,7 @@ public class PlayerMovement : MonoBehaviour
     {
         Time.timeScale = 1f;
         velocity = Vector3.zero;
+        slideVelocity = Vector3.zero;
         currentStamina = maxStamina;
     }
 
@@ -52,21 +60,39 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleMovement()
     {
-        // Get input
+        // Input
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
         Vector3 move = transform.right * horizontal + transform.forward * vertical;
 
-        // Apply movement
         float speed = isSprinting ? sprintSpeed : moveSpeed;
-        controller.Move(move * speed * Time.deltaTime);
 
-        // Apply gravity
+        // Check if on ice
+        bool onIce = Physics.CheckSphere(groundCheck.position, groundCheckDistance, iceLayer);
+
+        // Apply ice sliding
+        if (onIce)
+        {
+            slideVelocity += move * iceSlideFactor * Time.deltaTime;
+        }
+        else
+        {
+            // Decay sliding when not on ice
+            slideVelocity = Vector3.Lerp(slideVelocity, Vector3.zero, Time.deltaTime * 5f);
+        }
+
+        // Combine normal movement and sliding
+        Vector3 totalMove = move * speed + slideVelocity;
+
+        // Gravity
         if (controller.isGrounded && velocity.y < 0f)
-            velocity.y = -2f; // Small negative to stick to ground
+            velocity.y = -2f;
 
         velocity.y += gravity * Time.deltaTime;
-        controller.Move(velocity * Time.deltaTime);
+        totalMove += new Vector3(0, velocity.y, 0);
+
+        // Move the CharacterController
+        controller.Move(totalMove * Time.deltaTime);
     }
 
     #endregion
@@ -76,13 +102,9 @@ public class PlayerMovement : MonoBehaviour
     private void HandleSprintInput()
     {
         if ((Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift)) && currentStamina >= minStaminaToSprint)
-        {
             isSprinting = true;
-        }
         else if (Input.GetKeyUp(KeyCode.LeftShift) || Input.GetKeyUp(KeyCode.RightShift) || currentStamina <= 0f)
-        {
             isSprinting = false;
-        }
     }
 
     private void HandleStamina()
@@ -115,14 +137,13 @@ public class PlayerMovement : MonoBehaviour
     public void ResetPlayer()
     {
         velocity = Vector3.zero;
+        slideVelocity = Vector3.zero;
         isSprinting = false;
         currentStamina = maxStamina;
 
-        // Reset position
         if (spawnPoint != null)
             transform.position = spawnPoint.position;
 
-        // Reset CharacterController collisions
         controller.enabled = false;
         controller.enabled = true;
     }
