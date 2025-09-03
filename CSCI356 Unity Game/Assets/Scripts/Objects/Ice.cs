@@ -9,11 +9,11 @@ public class Ice : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        // Make sure the player has the PlayerMovementWithIce script
-        PlayerMovementWithIce player = other.GetComponent<PlayerMovementWithIce>();
+        // Make sure the player has the PlayerMovement script
+        PlayerMovement player = other.GetComponent<PlayerMovement>();
         if (player != null)
         {
-            // Tell the player to add sliding momentum in the direction they are moving
+            // Get input direction relative to the player
             Vector3 inputDirection = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical"));
             Vector3 slideDir = other.transform.TransformDirection(inputDirection);
             player.AddSlide(slideDir, slideStrength);

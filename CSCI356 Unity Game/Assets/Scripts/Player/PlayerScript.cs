@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
-public class PlayerMovementWithIce : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
     [Header("Spawn Settings")]
     public Transform spawnPoint;
@@ -15,6 +15,9 @@ public class PlayerMovementWithIce : MonoBehaviour
     public Transform groundCheck;
     public float groundCheckDistance = 0.4f;
     public LayerMask groundMask;
+
+    private Vector3 slideVelocity;
+
 
     [Header("Sprint & Stamina Settings")]
     public float maxStamina = 100f;
@@ -30,7 +33,7 @@ public class PlayerMovementWithIce : MonoBehaviour
 
     private CharacterController controller;
     private Vector3 velocity;
-    private Vector3 slideVelocity;
+    
     private bool isSprinting = false;
     private float currentStamina;
 
@@ -57,6 +60,13 @@ public class PlayerMovementWithIce : MonoBehaviour
     }
 
     #region Movement
+
+    // Allows external scripts (like Ice) to add sliding momentum
+    public void AddSlide(Vector3 direction, float strength)
+    {
+        slideVelocity += direction * strength * Time.deltaTime;
+        }
+
 
     private void HandleMovement()
     {
