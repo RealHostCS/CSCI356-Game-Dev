@@ -29,11 +29,11 @@ public class PowerUpOrb : MonoBehaviour
         Debug.Log("Trigger Monster State Change");
         if (other.CompareTag("Player"))
         {
-            MonsterStateChange();
+            //MonsterStateChange();
             Destroy(gameObject);
         }
     }
-
+/*
     public void MonsterStateChange()
     {
         if (monsterstat != null)
@@ -46,4 +46,5 @@ public class PowerUpOrb : MonoBehaviour
             Debug.LogWarning("MonsterStats reference is missing, cannot change state!");
         }
     }
+    */
 }

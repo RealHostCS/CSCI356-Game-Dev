@@ -6,11 +6,14 @@ public class MonsterStats : MonoBehaviour
 
     public enum MonsterState
     {
+        Angry,
+        scared,
         Attack,
-        Run
+        Hiding,
+        stalk,
     }
 
-    public MonsterState currentMonsterState = MonsterState.Attack;
+    public MonsterState currentMonsterState = MonsterState.stalk;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
