@@ -52,10 +52,12 @@ public class CameraItem : MonoBehaviour
         flashLight.enabled = false;
 
         // Use ray cast to check if monster in in light
-        Ray ray = new Ray(transform.position, transform.forward);
+        var origin = flashLight != null ? flashLight.transform.position : transform.position;
+        var dir    = flashLight != null ? flashLight.transform.forward  : transform.forward;
+        Ray ray = new Ray(origin, dir);
         Debug.Log("Sending raycast");
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, rayDistance))
+        if (Physics.Raycast(ray, out hit, rayDistance, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Collide))
         {
             if (hit.collider.CompareTag("Monster"))
             {
