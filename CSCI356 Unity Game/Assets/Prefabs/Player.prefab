@@ -121,7 +121,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6610219419815436832
 Transform:
   m_ObjectHideFlags: 0
@@ -131,7 +131,7 @@ Transform:
   m_GameObject: {fileID: 1552154220535737649}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.148, z: 1.063}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -238,10 +238,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sfxSource: {fileID: 7451444080166133911}
-  onSound: {fileID: 8300000, guid: f2f43ed99a5394b238d310f1825d446e, type: 3}
+  onSound: {fileID: 8300000, guid: ddd8332ffe1e048e4bd482fb8fae28c7, type: 3}
   flashLight: {fileID: 8273537519574267783}
   flashDuration: 0.2
-  cooldown: 5
+  cooldown: 1
+  rayDistance: 30
 --- !u!1 &1655705191989980491
 GameObject:
   m_ObjectHideFlags: 0
@@ -253,13 +254,14 @@ GameObject:
   - component: {fileID: 7585628523972984286}
   - component: {fileID: 486125010690530038}
   - component: {fileID: 7467975721128890750}
+  - component: {fileID: 3721157979162178585}
   m_Layer: 8
   m_Name: FlashLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7585628523972984286
 Transform:
   m_ObjectHideFlags: 0
@@ -269,7 +271,7 @@ Transform:
   m_GameObject: {fileID: 1655705191989980491}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.001, y: -0.34, z: 0.48205}
+  m_LocalPosition: {x: -0.001, y: -0.186, z: 1.0151}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -285,10 +287,10 @@ Light:
   m_Enabled: 1
   serializedVersion: 11
   m_Type: 0
-  m_Color: {r: 0.8930817, g: 0.8930817, b: 0.8930817, a: 1}
-  m_Intensity: 20
-  m_Range: 10
-  m_SpotAngle: 34.320118
+  m_Color: {r: 1, g: 0.85602564, b: 0.6367924, a: 1}
+  m_Intensity: 150
+  m_Range: 49.392426
+  m_SpotAngle: 40.49253
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
@@ -363,6 +365,25 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+--- !u!114 &3721157979162178585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1655705191989980491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 454e411c7797bac48b8f4bb02f48f79c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 6866022265687852853}
+  playerCamera: {fileID: 0}
+  verticalBobAmount: 2
+  horizontalBobAmount: 10
+  bobSpeed: 0.5
+  speedMultiplier: 0.5
+  smoothTime: 0.1
 --- !u!1 &2541674544264000281
 GameObject:
   m_ObjectHideFlags: 0
@@ -913,6 +934,7 @@ GameObject:
   - component: {fileID: 7417185231933914359}
   - component: {fileID: 7584433518821820036}
   - component: {fileID: 2415326559131023540}
+  - component: {fileID: 746276358411452085}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1061,10 +1083,6 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 8
-  iceLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  iceSlideFactor: 5
   maxStamina: 100
   staminaDrainRate: 25
   staminaRechargeRate: 10
@@ -1145,7 +1163,7 @@ MonoBehaviour:
   flashlight: {fileID: 1655705191989980491}
   humSound: {fileID: 8300000, guid: 4401dd288f1a20d4bb314e677890febe, type: 3}
   onSound: {fileID: 8300000, guid: f98db093986a5b447802b0d5b7a06f46, type: 3}
-  offSound: {fileID: 8300000, guid: b63eb4c2fdbbecf41a037784ff355147, type: 3}
+  offSound: {fileID: 8300000, guid: 4708e58bfb64041d2ad410ce5bbd238f, type: 3}
   humSource: {fileID: 2532041169059853148}
   sfxSource: {fileID: 7451444080166133911}
 --- !u!82 &7584433518821820036
@@ -1262,6 +1280,21 @@ MonoBehaviour:
   minPitch: 0.6
   maxPitch: 1.6
   maxSpeed: 18
+--- !u!114 &746276358411452085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4936705905495215895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4ce29ee078d2fa43b722955ddab5815, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashlight: {fileID: 1655705191989980491}
+  cameraItem: {fileID: 1552154220535737649}
+  player: {fileID: 4936705905495215895}
 --- !u!1 &5587343880633068916
 GameObject:
   m_ObjectHideFlags: 0

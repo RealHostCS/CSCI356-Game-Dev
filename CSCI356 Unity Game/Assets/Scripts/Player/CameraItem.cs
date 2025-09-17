@@ -3,8 +3,8 @@ using System.Collections;
 
 public class CameraItem : MonoBehaviour
 {
-    //public AudioSource sfxSource;
-    //public AudioClip onSound;
+    public AudioSource sfxSource;
+    public AudioClip onSound;
     public Light flashLight;           // Assign a Light in the Inspector
     public float flashDuration = 0.2f; // How long the flash lasts
     public float cooldown = 5f;        // Cooldown between flashes
@@ -14,11 +14,6 @@ public class CameraItem : MonoBehaviour
 
     void Start()
     {
-        /* Ensure SFX source exists
-        if (sfxSource == null)
-        {
-            Debug.LogWarning("SFX AudioSource not assigned.");
-        }*/
         if (flashLight == null)
         {
             Debug.LogError("Flash light is not assigned in the inspector!");
@@ -43,6 +38,8 @@ public class CameraItem : MonoBehaviour
 
         // Flash the light
         flashLight.enabled = true;
+        if (sfxSource != null && onSound != null)
+            sfxSource.PlayOneShot(onSound);
         // Play ON sound
         /*if (sfxSource != null && onSound != null)
         {
@@ -72,6 +69,11 @@ public class CameraItem : MonoBehaviour
 
         // Wait cooldown before allowing another flash
         yield return new WaitForSeconds(cooldown);
+        isCharging = false;
+    }
+
+    private void OnEnable()
+    {
         isCharging = false;
     }
 }
