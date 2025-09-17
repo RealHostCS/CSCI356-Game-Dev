@@ -152,7 +152,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d179a8f2bb33995449fe4cc4fe8c7c37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pushForce: 5
+  pushMultiplier: 5
+  minInputMagnitude: 0.1
+  damping: 2
 --- !u!54 &146014912
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -302,7 +304,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d179a8f2bb33995449fe4cc4fe8c7c37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pushForce: 5
+  pushMultiplier: 5
+  minInputMagnitude: 0.1
+  damping: 2
 --- !u!54 &167388376
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -691,7 +695,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d179a8f2bb33995449fe4cc4fe8c7c37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pushForce: 5
+  pushMultiplier: 5
+  minInputMagnitude: 0.1
+  damping: 2
 --- !u!54 &574956993
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -957,7 +963,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d179a8f2bb33995449fe4cc4fe8c7c37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pushForce: 5
+  pushMultiplier: 5
+  minInputMagnitude: 0.1
+  damping: 2
 --- !u!1 &746840825
 GameObject:
   m_ObjectHideFlags: 0
@@ -1376,6 +1384,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7390023611054889138, guid: 11ba6cd8513922c4cb5dc5ad27f9f2fd, type: 3}
+      propertyPath: m_ProvidesContacts
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1409,12 +1421,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1144491453}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d179a8f2bb33995449fe4cc4fe8c7c37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pushForce: 1
+  pushMultiplier: 5
+  minInputMagnitude: 0.1
+  damping: 2
 --- !u!54 &1144491455
 Rigidbody:
   m_ObjectHideFlags: 0
