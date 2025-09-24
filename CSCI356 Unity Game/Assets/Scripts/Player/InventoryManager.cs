@@ -1,11 +1,13 @@
 using UnityEngine;
 
-public class InventoryManager : MonoBehaviour
+public class InventoryManager : MonoBehaviour 
 {
     public GameObject flashlight;
     public GameObject cameraItem;
     public GameObject player;
     private FlashLight flashlightScript;
+
+    public GameObject SprayCan;
     private int currentItem = 1;
     void Start()
     {
@@ -23,6 +25,10 @@ public class InventoryManager : MonoBehaviour
         {
             EquipItem(2);
         }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            EquipItem(3);
+        }
     }
 
     private void EquipItem(int itemNumber)
@@ -34,6 +40,7 @@ public class InventoryManager : MonoBehaviour
             flashlight.SetActive(true);
             flashlightScript.enabled = true;
             cameraItem.SetActive(false);
+            SprayCan.SetActive(false);
         }
 
         if (currentItem == 2)
@@ -41,6 +48,15 @@ public class InventoryManager : MonoBehaviour
             cameraItem.SetActive(true);
             flashlight.SetActive(false);
             flashlightScript.enabled = false;
+            SprayCan.SetActive(false);
+        }
+
+        if (currentItem == 3)
+        {
+            cameraItem.SetActive(false);
+            flashlight.SetActive(false);
+            flashlightScript.enabled = false;
+            SprayCan.SetActive(true);
         }
     }
 }
