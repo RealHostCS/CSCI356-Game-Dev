@@ -24,11 +24,14 @@ namespace MimicSpace
         private NavMeshAgent agent;
         private Mimic myMimic;
         private Vector3 velocity = Vector3.zero;
+        private MonsterStates MonsterStates;
 
+        private bool hidingSpotFound = false;
         private void Start()
         {
             agent = GetComponent<NavMeshAgent>();
             myMimic = GetComponent<Mimic>();
+            MonsterStates = GetComponent<MonsterStates>();
 
             // Sync agent speed with Mimic speed for consistency
             agent.speed = agent.speed == 0 ? 5f : agent.speed;
@@ -37,11 +40,21 @@ namespace MimicSpace
 
         private void Update()
         {
-            if (target != null)
+            if (MonsterStates != null)
             {
-                // Set the AI's destination to the target
-                agent.SetDestination(target.position);
+                // Pass the enum state to OnStateUpdate
+                if (MonsterStates.currentMonsterState == MonsterStates.MonsterState.hiding && !hidingSpotFound)
+                {
+                    OnStateUpdate(MonsterStates.currentMonsterState);
+                    hidingSpotFound = true;
+                }
+                if (!(MonsterStates.currentMonsterState == MonsterStates.MonsterState.hiding)) 
+                {
+                    OnStateUpdate(MonsterStates.currentMonsterState);
+                    hidingSpotFound = false;
+                }
             }
+
 
             // Calculate local velocity based on NavMeshAgent movement
             Vector3 desiredVelocity = agent.velocity;
@@ -68,5 +81,75 @@ namespace MimicSpace
 
             transform.position = Vector3.Lerp(transform.position, destHeight, velocityLerpCoef * Time.deltaTime);
         }
+
+        void OnStateUpdate(MonsterStates.MonsterState currentMonsterState)
+        {
+            switch (currentMonsterState)
+            {
+                case MonsterStates.MonsterState.angry:
+                    agent.SetDestination(target.position);
+                    break;
+
+                case MonsterStates.MonsterState.scared:
+                    // Direction away from the target
+                    Vector3 fleeDirection = (transform.position - target.position).normalized;
+
+                    // Pick a point some distance away (e.g., 10 units away)
+                    Vector3 fleePosition = transform.position + fleeDirection * 10f;
+
+                    agent.SetDestination(fleePosition);
+                    break;
+
+                case MonsterStates.MonsterState.attack:
+                    agent.SetDestination(target.position);
+                    break;
+
+                case MonsterStates.MonsterState.stalk:
+                float minDistance = 50f;
+                float maxDistance = 60f;
+
+                Vector3 toPlayer = target.position - transform.position;
+                float distance = toPlayer.magnitude;
+
+                if (distance < minDistance)
+                {
+                    // Too close -> move back out
+                    Vector3 retreatDir = (transform.position - target.position).normalized;
+                    Vector3 retreatPos = target.position + retreatDir * minDistance;
+                    agent.SetDestination(retreatPos);
+                }
+                else if (distance > maxDistance)
+                {
+                    // Too far -> move closer
+                    agent.SetDestination(target.position);
+                }
+                else
+                {
+                    // In stalk zone -> orbit around the player
+                    float orbitSpeed = 40f; // degrees per second
+                    float angle = orbitSpeed * Time.time; 
+
+                    // Pick a point on a circle around the player
+                    Vector3 orbitOffset = new Vector3(
+                        Mathf.Cos(angle * Mathf.Deg2Rad),
+                        0,
+                        Mathf.Sin(angle * Mathf.Deg2Rad)
+                    ) * distance;
+
+                    Vector3 orbitPos = target.position + orbitOffset;
+                    agent.SetDestination(orbitPos);
+                }
+                break;
+
+                case MonsterStates.MonsterState.hiding:
+                        float hideDistance = 100f; // how far from player to hide
+                        Vector3 hideDir = (transform.position - target.position).normalized;
+                        Vector3 hidePos = target.position + hideDir * hideDistance;
+
+                        agent.SetDestination(hidePos);
+                    break;
+            }
+        }
+        
     }
 }

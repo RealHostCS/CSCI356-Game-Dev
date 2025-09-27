@@ -163,7 +163,7 @@ namespace MimicSpace
             newLeg.transform.SetParent(myMimic.transform);
 
             legCount++;
-            Debug.Log("Spawning leg at " + footPosition);
+            //Debug.Log("Spawning leg at " + footPosition);
         }
 
         public void RecycleLeg(GameObject leg)

@@ -97,7 +97,7 @@ namespace MimicSpace
             isRemoved = false;
             canDie = false;
             isDeployed = false;
-            Debug.Log("Initializing leg, ground point = " + handles[7]);
+            //Debug.Log("Initializing leg, ground point = " + handles[7]);
             StartCoroutine("WaitToDie");
             StartCoroutine("WaitAndDie", lifeTime);
             Sethandles();
