@@ -18,55 +18,61 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Sprint & Stamina Settings")]
     public float maxStamina = 100f;
-    public float staminaDrainRate = 25f; // Stamina per second while sprinting
-    public float staminaRechargeRate = 10f; // Stamina per second when not sprinting
+    public float staminaDrainRate = 25f;
+    public float staminaRechargeRate = 10f;
     public float minStaminaToSprint = 10f;
 
     private CharacterController controller;
     private Vector3 velocity;
-    private bool isSprinting = false;
+    private bool isSprinting;
     private float currentStamina;
 
     void Awake()
     {
         controller = GetComponent<CharacterController>();
-        if (controller == null)
+        if (!controller)
             Debug.LogError("PlayerMovement requires a CharacterController!");
     }
 
     void Start()
     {
-        Time.timeScale = 1f;
         velocity = Vector3.zero;
         currentStamina = maxStamina;
     }
 
     void Update()
     {
-        HandleMovement();
         HandleSprintInput();
         HandleStamina();
+        HandleMovement();
     }
 
     #region Movement
 
     private void HandleMovement()
     {
-        // Get input
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
-        Vector3 move = transform.right * horizontal + transform.forward * vertical;
+        // Get raw input for instant response
+        float horizontal = Input.GetAxisRaw("Horizontal");
+        float vertical = Input.GetAxisRaw("Vertical");
 
-        // Apply movement
+        Vector3 inputDir = (transform.right * horizontal + transform.forward * vertical).normalized;
+
+        // Determine current speed
         float speed = isSprinting ? sprintSpeed : moveSpeed;
-        controller.Move(move * speed * Time.deltaTime);
 
-        // Apply gravity
+        // Apply movement instantly (no slipping)
+        Vector3 move = inputDir * speed;
+
+        // Gravity
         if (controller.isGrounded && velocity.y < 0f)
-            velocity.y = -2f; // Small negative to stick to ground
+            velocity.y = -2f; // Small downward force to stay grounded
 
         velocity.y += gravity * Time.deltaTime;
-        controller.Move(velocity * Time.deltaTime);
+
+        // Combine horizontal movement with vertical velocity
+        Vector3 finalMove = move + new Vector3(0, velocity.y, 0);
+
+        controller.Move(finalMove * Time.deltaTime);
     }
 
     #endregion
@@ -75,14 +81,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleSprintInput()
     {
-        if ((Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift)) && currentStamina >= minStaminaToSprint)
-        {
-            isSprinting = true;
-        }
-        else if (Input.GetKeyUp(KeyCode.LeftShift) || Input.GetKeyUp(KeyCode.RightShift) || currentStamina <= 0f)
-        {
-            isSprinting = false;
-        }
+        isSprinting = (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) && currentStamina >= minStaminaToSprint;
     }
 
     private void HandleStamina()
@@ -98,15 +97,11 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            currentStamina += staminaRechargeRate * Time.deltaTime;
-            currentStamina = Mathf.Clamp(currentStamina, 0f, maxStamina);
+            currentStamina = Mathf.Clamp(currentStamina + staminaRechargeRate * Time.deltaTime, 0f, maxStamina);
         }
     }
 
-    public float GetStaminaPercentage()
-    {
-        return currentStamina / maxStamina;
-    }
+    public float GetStaminaPercentage() => currentStamina / maxStamina;
 
     #endregion
 
@@ -118,11 +113,9 @@ public class PlayerMovement : MonoBehaviour
         isSprinting = false;
         currentStamina = maxStamina;
 
-        // Reset position
-        if (spawnPoint != null)
+        if (spawnPoint)
             transform.position = spawnPoint.position;
 
-        // Reset CharacterController collisions
         controller.enabled = false;
         controller.enabled = true;
     }
