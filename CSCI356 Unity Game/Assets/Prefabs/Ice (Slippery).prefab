@@ -526,6 +526,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8727385273913548636}
   - component: {fileID: 4271363779967129980}
+  - component: {fileID: 150357738269188280}
   m_Layer: 0
   m_Name: Ice (Slippery)
   m_TagString: Untagged
@@ -542,7 +543,7 @@ Transform:
   m_GameObject: {fileID: 9001979827083745670}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.18, y: 21, z: 184.7}
+  m_LocalPosition: {x: 30.624847, y: -0.34, z: 188.37059}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -567,3 +568,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_playerscript: {fileID: 0}
+--- !u!136 &150357738269188280
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9001979827083745670}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 4.2310944
+  m_Height: 11.347603
+  m_Direction: 0
+  m_Center: {x: 4.142914, y: 0, z: 1.7636719}
