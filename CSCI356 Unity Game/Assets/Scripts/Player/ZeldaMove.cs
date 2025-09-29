@@ -32,7 +32,7 @@ public class ZeldaMove : MonoBehaviour
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
 
-        Vector2 moveInput = new Vector2(horizontal, vertical).normalized;
+        Vector2 moveInput = new Vector2(horizontal, vertical);
         Vector3 move = new Vector3(moveInput.x, 0, moveInput.y) * moveSpeed;
 
         // Move with CharacterController
@@ -41,14 +41,14 @@ public class ZeldaMove : MonoBehaviour
         // 🎬 Animator updates
         anim.SetFloat("MoveX", moveInput.x);
         anim.SetFloat("MoveY", moveInput.y);
-        anim.SetFloat("inputMagnitude", moveInput.sqrMagnitude);
+        anim.SetFloat("MoveMagnitude", moveInput.sqrMagnitude);
 
         // Store last facing direction
         if (moveInput.sqrMagnitude > 0.01f)
         {
             lastMoveDirection = moveInput;
-            anim.SetFloat("lastMoveX", lastMoveDirection.x);
-            anim.SetFloat("lastMoveY", lastMoveDirection.y);
+            anim.SetFloat("LastMoveX", lastMoveDirection.x);
+            anim.SetFloat("LastMoveY", lastMoveDirection.y);
         }
     }
 }
