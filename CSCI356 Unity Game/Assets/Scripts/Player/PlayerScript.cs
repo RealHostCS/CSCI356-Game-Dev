@@ -27,6 +27,7 @@ public class PlayerMovement : MonoBehaviour
     private bool isSprinting;
     private float currentStamina;
 
+
     void Awake()
     {
         controller = GetComponent<CharacterController>();
