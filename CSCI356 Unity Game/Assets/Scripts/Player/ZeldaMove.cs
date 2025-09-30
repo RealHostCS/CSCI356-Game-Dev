@@ -11,6 +11,14 @@ public class ZeldaMove : MonoBehaviour
 
     private CharacterController controller;
 
+    [Header("Attack")]
+    public GameObject hitboxPrefab;
+    private GameObject activeHitbox;
+
+    public float hitboxLifeTime = 0.2f;
+    public float hitboxDistance = 1f;
+
+
     void Awake()
     {
         controller = GetComponent<CharacterController>();
@@ -24,6 +32,7 @@ public class ZeldaMove : MonoBehaviour
     void Update()
     {
         HandleMovement();
+        HandleAttack();
     }
 
     private void HandleMovement()
@@ -49,6 +58,23 @@ public class ZeldaMove : MonoBehaviour
             lastMoveDirection = moveInput;
             anim.SetFloat("LastMoveX", lastMoveDirection.x);
             anim.SetFloat("LastMoveY", lastMoveDirection.y);
+        }
+    }
+
+    private void HandleAttack()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            anim.SetTrigger("Attack");
+
+             if (hitboxPrefab != null)
+            {
+                Vector3 spawnPos = transform.position + new Vector3(lastMoveDirection.x, 0, lastMoveDirection.y) * hitboxDistance;
+                activeHitbox = Instantiate(hitboxPrefab, spawnPos, Quaternion.identity);
+                activeHitbox.transform.forward = new Vector3(lastMoveDirection.x, 0, lastMoveDirection.y);
+
+
+            }
         }
     }
 }
