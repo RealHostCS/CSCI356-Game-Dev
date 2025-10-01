@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using Unity.Mathematics;
 
 public class Enemy : MonoBehaviour
 {
@@ -10,26 +11,26 @@ public class Enemy : MonoBehaviour
     [Header("Flash Effect")]
     public float flashDuration = 0.2f;
 
+    public float maxFlash = 1f;
+
+    private Material mat;
+
+    private bool isFlashing = false;
+
+
     private SpriteRenderer spriteRenderer;
     private MeshRenderer meshRenderer;
     private Animator animator;
 
     private Color originalColor;
-    private bool isFlashing = false;
+
 
     void Awake()
     {
         currentHealth = maxHealth;
 
-        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-        meshRenderer = GetComponentInChildren<MeshRenderer>();
-        animator = GetComponent<Animator>();
+        mat = GetComponentInChildren<SpriteRenderer>().material;
 
-        // Save original color
-        if (spriteRenderer != null)
-            originalColor = spriteRenderer.color;
-        else if (meshRenderer != null)
-            originalColor = meshRenderer.material.color;
     }
 
     public void TakeDamage(int amount)
@@ -39,6 +40,9 @@ public class Enemy : MonoBehaviour
         if (!isFlashing)
             StartCoroutine(Flash());
 
+        if (CameraShake.Instance != null)
+            CameraShake.Instance.Shake(0.15f, 0.1f);
+            
         if (currentHealth <= 0)
             Destroy(gameObject);
     }
@@ -47,27 +51,11 @@ public class Enemy : MonoBehaviour
     {
         isFlashing = true;
 
-        // Disable animator temporarily if it exists
-        if (animator != null)
-            animator.enabled = false;
+        mat.SetFloat("_FlashAmount", maxFlash);
+        yield return new WaitForSeconds(flashDuration / 2f);
 
-        // Flash white
-        if (spriteRenderer != null)
-            spriteRenderer.color = Color.white;
-        else if (meshRenderer != null)
-            meshRenderer.material.color = Color.white;
-
-        yield return new WaitForSeconds(flashDuration);
-
-        // Restore original color
-        if (spriteRenderer != null)
-            spriteRenderer.color = originalColor;
-        else if (meshRenderer != null)
-            meshRenderer.material.color = originalColor;
-
-        // Re-enable animator
-        if (animator != null)
-            animator.enabled = true;
+        mat.SetFloat("_FlashAmount", 0f);
+        yield return new WaitForSeconds(flashDuration / 2f);
 
         isFlashing = false;
     }
