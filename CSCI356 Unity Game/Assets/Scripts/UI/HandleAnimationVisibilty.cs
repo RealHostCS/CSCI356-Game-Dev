@@ -1,26 +1,24 @@
 using UnityEngine;
 using UnityEngine.Playables;
 using System.Collections;
-using UnityEngine.SceneManagement;
 
 public class CutsceneVisibility : MonoBehaviour
 {
+    [Header("References")]
     public PlayableDirector director;
-    public GameObject[] cutsceneObjects;
+    [Tooltip("Parent object that holds all cutscene UI images/animations")]
+    public GameObject cutsceneRoot;
 
     void Awake()
     {
-        // Start hidden and make sure their Animator won't auto-play when enabled
-        foreach (var obj in cutsceneObjects)
-        {
-            if (obj == null) continue;
-            obj.SetActive(false);
-            var anim = obj.GetComponent<Animator>();
-            if (anim != null) anim.enabled = false;
-        }
+        ResetCutscene();
 
         if (director != null)
         {
+            // prevent double subscriptions
+            director.played -= OnCutsceneStart;
+            director.stopped -= OnCutsceneEnd;
+
             director.played += OnCutsceneStart;
             director.stopped += OnCutsceneEnd;
         }
@@ -35,63 +33,76 @@ public class CutsceneVisibility : MonoBehaviour
         }
     }
 
+    // Called when Timeline starts playing
     void OnCutsceneStart(PlayableDirector d)
     {
+        Time.timeScale = 0f; // freeze gameplay
         director.timeUpdateMode = DirectorUpdateMode.UnscaledGameTime;
 
-        Time.timeScale = 0f; // freeze the game
-
-        foreach (var obj in cutsceneObjects)
+        if (cutsceneRoot != null)
         {
-            if (obj == null) continue;
-            obj.SetActive(true);
+            cutsceneRoot.SetActive(true);
 
-            var anim = obj.GetComponent<Animator>();
-            if (anim != null)
+            // enable all animators and set to unscaled time
+            foreach (var anim in cutsceneRoot.GetComponentsInChildren<Animator>(true))
             {
                 anim.enabled = true;
-                anim.updateMode = AnimatorUpdateMode.UnscaledTime; // <- this fixes it
+                anim.updateMode = AnimatorUpdateMode.UnscaledTime;
                 anim.Rebind();
                 anim.Update(0f);
             }
         }
     }
 
+    // Called when Timeline stops
     void OnCutsceneEnd(PlayableDirector d)
     {
-        // Unfreeze the game
-        Time.timeScale = 1f;
-        Debug.Log("[Cutscene] Ended - cleaning up");
-        // Use coroutine to allow the director to finish its internal work,
-        // then stop & reset animators before hiding objects.
         StartCoroutine(CleanupAfterTimeline());
-        SceneManager.LoadScene("BaybladeBattle");
     }
 
     private IEnumerator CleanupAfterTimeline()
     {
-        // Stop director so it won't keep evaluating clips
-        if (director != null)
-            director.Stop();
-
-        // wait one frame so any pending evaluations finish
+        // wait for one frame so timeline finishes fully
         yield return null;
 
-        foreach (var obj in cutsceneObjects)
-        {
-            if (obj == null) continue;
+        Time.timeScale = 1f; // unfreeze gameplay
 
-            var anim = obj.GetComponent<Animator>();
-            if (anim != null)
+        if (director != null)
+        {
+            director.Stop();
+            director.time = 0;
+        }
+
+        if (cutsceneRoot != null)
+        {
+            foreach (var anim in cutsceneRoot.GetComponentsInChildren<Animator>(true))
             {
-                // reset animator to base/default pose and prevent it from auto-playing
                 anim.Rebind();
                 anim.Update(0f);
                 anim.enabled = false;
             }
 
-            // finally hide the object
-            obj.SetActive(false);
+            cutsceneRoot.SetActive(false);
         }
+
+        // Start the next stage (like your minigame)
+        var transition = FindFirstObjectByType<SceneTransitionManager>();
+        if (transition != null)
+            transition.StartMinigame();
+    }
+
+    private void ResetCutscene()
+    {
+        if (cutsceneRoot == null) return;
+
+        // ensure cutscene objects are off and animators reset
+        foreach (var anim in cutsceneRoot.GetComponentsInChildren<Animator>(true))
+        {
+            anim.enabled = false;
+            anim.Rebind();
+            anim.Update(0f);
+        }
+
+        cutsceneRoot.SetActive(false);
     }
 }

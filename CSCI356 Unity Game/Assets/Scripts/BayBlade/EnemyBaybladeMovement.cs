@@ -85,7 +85,7 @@ public class EnemyBaybladeMovement : MonoBehaviour, IBayblade
         {
             spinSpeed = 0f;
             Debug.Log("Enemy Spin has reached 0!");
-            SceneManager.LoadScene("Bayblade_level");
+            Object.FindFirstObjectByType<SceneTransitionManager>().ReturnFromMinigame();
         }
         else
         {

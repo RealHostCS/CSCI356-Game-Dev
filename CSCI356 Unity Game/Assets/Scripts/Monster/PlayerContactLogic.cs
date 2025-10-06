@@ -39,7 +39,7 @@ public class PlayerContactLogic : MonoBehaviour
                 if (isBayblade && CollectedBlades > 0)
                 {
                     if (director != null)
-                        CollectedBlades--;
+                        baybladeComponent.CollectedBlades--;
                         PlayerAttributes playerAttributes = player.GetComponent<PlayerAttributes>();
                         updatePlayerUi.UpdateNumberCount(playerAttributes.CollectedBlades); 
                         director.Play();
