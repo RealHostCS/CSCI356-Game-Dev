@@ -14,20 +14,9 @@ public class Pause : MonoBehaviour
 
     void Start()
     {
-        if (PauseScreen != null)
-            PauseScreen.SetActive(false);
 
         if (StaminaBar != null)
             StaminaBar.SetActive(true);
-
-        if (additionalUI != null)
-        {
-            foreach (GameObject ui in additionalUI)
-            {
-                if (ui != null)
-                    ui.SetActive(false);
-            }
-        }
 
         Time.timeScale = 1f; // Ensure game starts unpaused
     }
@@ -45,7 +34,7 @@ public class Pause : MonoBehaviour
 
     public void PauseGame()
     {
-        Debug.Log("Pause triggered!"); // ✅ Helps confirm it's running
+        Debug.Log("Pause triggered!");
 
         if (mouseLookScript != null)
             mouseLookScript.enabled = false;
