@@ -21,6 +21,13 @@ namespace MimicSpace
         public Transform target; // Assign your player or another object here
         public float stoppingDistance = 1.5f;
 
+        [Header("Stalk Settings")]
+        public float minDistance = 50f;
+        public float maxDistance = 60f;
+
+        [Header("Hide Distance")]
+        public float hideDistance = 100f;
+
         private NavMeshAgent agent;
         private Mimic myMimic;
         private Vector3 velocity = Vector3.zero;
@@ -105,8 +112,6 @@ namespace MimicSpace
                     break;
 
                 case MonsterStates.MonsterState.stalk:
-                float minDistance = 50f;
-                float maxDistance = 60f;
 
                 Vector3 toPlayer = target.position - transform.position;
                 float distance = toPlayer.magnitude;
@@ -142,7 +147,6 @@ namespace MimicSpace
                 break;
 
                 case MonsterStates.MonsterState.hiding:
-                        float hideDistance = 100f; // how far from player to hide
                         Vector3 hideDir = (transform.position - target.position).normalized;
                         Vector3 hidePos = target.position + hideDir * hideDistance;
 

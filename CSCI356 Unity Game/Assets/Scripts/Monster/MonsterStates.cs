@@ -15,6 +15,11 @@ public class MonsterStates : MonoBehaviour
         Null
     }
 
+    [Header("Angry States")]
+        
+    [Header("Scared States")]
+    [Header("Attack States")]
+    [Header("Hiding States")]
     private float chance60Percent = 0.6f;
     private float chance10Percent = 0.9f;
 
