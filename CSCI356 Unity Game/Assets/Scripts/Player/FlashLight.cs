@@ -91,4 +91,23 @@ public class FlashLight : MonoBehaviour
                 sfxSource.PlayOneShot(offSound);
         }
     }
+    private void OnEnable()
+    {
+        isOn = true;
+        if (isOn)
+        {
+            // Start hum (loop)
+            if (humSource != null && humSource.clip != null && !humSource.isPlaying)
+                humSource.Play();
+
+            // Play ON click
+            if (sfxSource != null && onSound != null)
+                sfxSource.PlayOneShot(onSound);
+        }
+    }
+
+    private void OnDisable()
+    {
+        humSource.Stop();
+    }
 }

@@ -289,9 +289,7 @@ GameObject:
   - component: {fileID: 320260826740612216}
   - component: {fileID: 7916122868137844742}
   - component: {fileID: 3104143759420719179}
-  - component: {fileID: 3481619248380135326}
   - component: {fileID: 310777247758992475}
-  - component: {fileID: 3313817297585092637}
   - component: {fileID: 1388122371694806778}
   - component: {fileID: 4559263132469098505}
   m_Layer: 0
@@ -404,19 +402,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f378956567f34749bbf8fcafc4e1f59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentMonsterState: 0
---- !u!114 &3481619248380135326
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9093656809486842602}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f378956567f34749bbf8fcafc4e1f59, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  player: {fileID: 6866022265687852853, guid: 11ba6cd8513922c4cb5dc5ad27f9f2fd, type: 3}
+  agent: {fileID: 1388122371694806778}
   currentMonsterState: 0
 --- !u!114 &310777247758992475
 MonoBehaviour:
@@ -431,20 +418,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerColision: 0
---- !u!114 &3313817297585092637
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9093656809486842602}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c62f21803cb95748af469312f551198, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 6866022265687852853, guid: 11ba6cd8513922c4cb5dc5ad27f9f2fd, type: 3}
-  agent: {fileID: 1388122371694806778}
 --- !u!195 &1388122371694806778
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -456,7 +429,7 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 12
-  m_Acceleration: 10
+  m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 0
