@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class Pause : MonoBehaviour
 {
@@ -15,8 +17,7 @@ public class Pause : MonoBehaviour
     void Start()
     {
 
-        if (StaminaBar != null)
-            StaminaBar.SetActive(true);
+        StaminaBar.SetActive(true);
 
         Time.timeScale = 1f; // Ensure game starts unpaused
     }
@@ -57,6 +58,11 @@ public class Pause : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+    }
+
+    public void Exit()
+    {
+        SceneManager.LoadScene("StartMenu");
     }
 
     public void ResumeGame()
