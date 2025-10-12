@@ -7,7 +7,10 @@ public class Pause : MonoBehaviour
     [Header("UI References")]
     public GameObject PauseScreen;       // Main pause menu panel
     public GameObject StaminaBar;        // Stamina UI
+    public GameObject PlayerCharacter;
     public GameObject[] additionalUI;    // Other UI panels (inventory, settings, etc.)
+
+    
 
     [Header("Other References")]
     public MonoBehaviour mouseLookScript; // Assign your MouseLook script in inspector
@@ -53,6 +56,11 @@ public class Pause : MonoBehaviour
                 anim.updateMode = AnimatorUpdateMode.UnscaledTime;
         }
 
+        if (PlayerCharacter != null)
+            PlayerCharacter.SetActive(false);
+
+        
+
         Time.timeScale = 0f;
         isPaused = true;
 
@@ -67,6 +75,10 @@ public class Pause : MonoBehaviour
 
     public void ResumeGame()
     {
+
+        if (PlayerCharacter != null)
+            PlayerCharacter.SetActive(true);
+
         if (mouseLookScript != null)
             mouseLookScript.enabled = true;
 
