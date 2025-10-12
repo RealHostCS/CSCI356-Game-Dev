@@ -670,6 +670,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa1e49c60b19d864ab67b56e27e2857d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &663849950 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1610435182325755049, guid: 11ba6cd8513922c4cb5dc5ad27f9f2fd, type: 3}
+  m_PrefabInstance: {fileID: 8445788532593889666}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -1104,7 +1115,7 @@ PrefabInstance:
     - target: {fileID: 5409554632627518464, guid: 17d734598d0a91c4db069b8f88e75ed7, type: 3}
       propertyPath: mouseLookScript
       value: 
-      objectReference: {fileID: 658636724}
+      objectReference: {fileID: 663849950}
     - target: {fileID: 5806499683381739889, guid: 17d734598d0a91c4db069b8f88e75ed7, type: 3}
       propertyPath: playerMovement
       value: 
