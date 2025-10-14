@@ -5,9 +5,9 @@ public class CameraItem : MonoBehaviour
 {
     public AudioSource sfxSource;
     public AudioClip onSound;
-    public Light flashLight;
-    public float flashDuration = 0.2f;
-    public float cooldown = 5f;
+    public Light flashLight;           // Assign a Light in the Inspector
+    public float flashDuration = 0.2f; // How long the flash lasts
+    public float cooldown = 5f;        // Cooldown between flashes
     public float rayDistance = 30f;
 
     private bool isCharging = false;
@@ -40,6 +40,11 @@ public class CameraItem : MonoBehaviour
         flashLight.enabled = true;
         if (sfxSource != null && onSound != null)
             sfxSource.PlayOneShot(onSound);
+        // Play ON sound
+        /*if (sfxSource != null && onSound != null)
+        {
+            sfxSource.PlayOneShot(onSound);           
+        }*/
         yield return new WaitForSeconds(flashDuration);
         flashLight.enabled = false;
 
@@ -53,6 +58,7 @@ public class CameraItem : MonoBehaviour
         {
             if (hit.collider.CompareTag("Monster"))
             {
+                // Example: tell the monster script to change state
                 MonsterStats monster = hit.collider.GetComponent<MonsterStats>();
                 if (monster != null)
                 {
