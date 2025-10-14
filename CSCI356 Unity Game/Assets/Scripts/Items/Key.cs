@@ -13,6 +13,20 @@ public class Key : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            InventoryManager player = other.GetComponent<InventoryManager>();
+            if (player != null)
+            {
+                player.hasKey = true;
+                player.CurrentKey = KeyNumber;
+                Destroy(gameObject);
+            }
+        }
     }
 }
