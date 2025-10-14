@@ -23,11 +23,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Zelda.unity
     guid: 985111c1119b6304ea4c5fa9681d814c
-    path: Assets/Scenes/BaybladeBattle.unity
-    guid: 8629bc87941474c4582d9fc4e9a2386f
   - enabled: 1
     path: Assets/Scenes/Bayblade_Level.unity
     guid: 866ed113463ca5b4681c863730083034
+  - enabled: 1
+    path: Assets/Scenes/BaybladeBattle.unity
+    guid: 8629bc87941474c4582d9fc4e9a2386f
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
