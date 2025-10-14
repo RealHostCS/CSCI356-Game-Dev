@@ -1409,7 +1409,7 @@ PrefabInstance:
       objectReference: {fileID: 903353004}
     - target: {fileID: 2415326559131023540, guid: 11ba6cd8513922c4cb5dc5ad27f9f2fd, type: 3}
       propertyPath: moveThreshold
-      value: 0.5
+      value: 0.9
       objectReference: {fileID: 0}
     - target: {fileID: 3668359743037134759, guid: 11ba6cd8513922c4cb5dc5ad27f9f2fd, type: 3}
       propertyPath: spawnPoint
