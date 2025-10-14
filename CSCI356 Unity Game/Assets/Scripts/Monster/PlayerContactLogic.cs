@@ -1,8 +1,20 @@
 using UnityEngine;
+using UnityEngine.Playables;
+using System.Collections;
 
 public class PlayerContactLogic : MonoBehaviour
 {
+    private GameObject player;
+    public PlayableDirector director;
     public bool playerColision = false;
+
+    [Header("UIChanging")]
+    public UpdatePlayerUI updatePlayerUi;
+    
+    void Start()
+    { 
+        player = GameObject.FindGameObjectWithTag("Player");
+    } 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Player"))
@@ -16,7 +28,27 @@ public class PlayerContactLogic : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerColision = true;
-            HandlePlayerDeath(other.gameObject);
+
+            var baybladeComponent = other.GetComponent<PlayerAttributes>();
+            bool isBayblade = false;
+            int CollectedBlades = 0;
+            if (baybladeComponent != null)
+                    isBayblade = baybladeComponent.isBayblade;
+                    CollectedBlades = baybladeComponent.CollectedBlades;
+
+                if (isBayblade && CollectedBlades > 0)
+                {
+                    if (director != null)
+                        baybladeComponent.CollectedBlades--;
+                        PlayerAttributes playerAttributes = player.GetComponent<PlayerAttributes>();
+                        updatePlayerUi.UpdateNumberCount(playerAttributes.CollectedBlades); 
+                        director.Play();
+                }
+                else
+                {
+                    StartCoroutine(StopTimelineAfterSeconds(10f));
+                    HandlePlayerDeath(other.gameObject);
+                }
         }
     }
 
@@ -34,5 +66,11 @@ public class PlayerContactLogic : MonoBehaviour
         {
             Debug.LogWarning("PlayerContactLogic: PlayerAttributes script not found on player object!");
         }
+    }
+
+    private IEnumerator StopTimelineAfterSeconds(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        director.Stop();
     }
 }

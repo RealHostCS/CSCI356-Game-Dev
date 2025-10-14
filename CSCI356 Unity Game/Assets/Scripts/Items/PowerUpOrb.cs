@@ -5,17 +5,17 @@ public class PowerUpOrb : MonoBehaviour
     public GameObject Monster;
     public GameObject Player;
 
-    private MonsterStats monsterstat;
+    private MonsterStates monsterstate;
 
     void Start()
     {
         // Always assign the reference in Start
         if (Monster != null)
         {
-            monsterstat = Monster.GetComponent<MonsterStats>();
-            if (monsterstat == null)
+            monsterstate = Monster.GetComponent<MonsterStates>();
+            if (monsterstate == null)
             {
-                Debug.LogError("MonsterStats component not found on Monster GameObject!");
+                Debug.LogError("MonsterStates component not found on Monster GameObject!");
             }
         }
         else
@@ -36,9 +36,9 @@ public class PowerUpOrb : MonoBehaviour
 
     public void MonsterStateChange()
     {
-        if (monsterstat != null)
+        if (monsterstate != null)
         {
-            monsterstat.currentMonsterState = MonsterStats.MonsterState.Run;
+            monsterstate.currentMonsterState = MonsterStates.MonsterState.attack;
             Debug.Log("Monster state changed to RUN!");
         }
         else
