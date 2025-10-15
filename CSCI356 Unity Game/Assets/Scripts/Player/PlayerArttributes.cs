@@ -6,6 +6,7 @@ public class PlayerAttributes : MonoBehaviour
     public int health = 100; // Example starting health
 
     public bool isDead = false; // Prevent multiple death triggers
+    
 
     private PlayerMovement movement;
     void Awake()

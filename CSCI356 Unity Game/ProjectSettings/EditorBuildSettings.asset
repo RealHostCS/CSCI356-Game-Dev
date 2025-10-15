@@ -6,8 +6,29 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/StartMenu.unity
+    guid: 3174b223dcf06a34182bbb493297f455
+  - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/SpaceStationHayden.unity
+    guid: 822b8c3c06a3662498c946b903da8908
+  - enabled: 1
+    path: Assets/Scenes/HaydensVoid.unity
+    guid: 352b48f4b354cf149aac48b36c0173a3
+  - enabled: 1
+    path: Assets/Scenes/HaydensScene.unity
+    guid: 6b4a48f4a3d837648b66ef6b7d4474d3
+  - enabled: 1
+    path: Assets/Scenes/Zelda.unity
+    guid: 985111c1119b6304ea4c5fa9681d814c
+  - enabled: 1
+    path: Assets/Scenes/Bayblade_Level.unity
+    guid: 866ed113463ca5b4681c863730083034
+  - enabled: 1
+    path: Assets/Scenes/BaybladeBattle.unity
+    guid: 8629bc87941474c4582d9fc4e9a2386f
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

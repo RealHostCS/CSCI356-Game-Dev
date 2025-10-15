@@ -1,11 +1,16 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class Pause : MonoBehaviour
 {
     [Header("UI References")]
     public GameObject PauseScreen;       // Main pause menu panel
     public GameObject StaminaBar;        // Stamina UI
+    public GameObject PlayerCharacter;
     public GameObject[] additionalUI;    // Other UI panels (inventory, settings, etc.)
+
+    
 
     [Header("Other References")]
     public MonoBehaviour mouseLookScript; // Assign your MouseLook script in inspector
@@ -14,20 +19,8 @@ public class Pause : MonoBehaviour
 
     void Start()
     {
-        if (PauseScreen != null)
-            PauseScreen.SetActive(false);
 
-        if (StaminaBar != null)
-            StaminaBar.SetActive(true);
-
-        if (additionalUI != null)
-        {
-            foreach (GameObject ui in additionalUI)
-            {
-                if (ui != null)
-                    ui.SetActive(false);
-            }
-        }
+        StaminaBar.SetActive(true);
 
         Time.timeScale = 1f; // Ensure game starts unpaused
     }
@@ -45,7 +38,7 @@ public class Pause : MonoBehaviour
 
     public void PauseGame()
     {
-        Debug.Log("Pause triggered!"); // ✅ Helps confirm it's running
+        Debug.Log("Pause triggered!");
 
         if (mouseLookScript != null)
             mouseLookScript.enabled = false;
@@ -63,6 +56,11 @@ public class Pause : MonoBehaviour
                 anim.updateMode = AnimatorUpdateMode.UnscaledTime;
         }
 
+        if (PlayerCharacter != null)
+            PlayerCharacter.SetActive(false);
+
+        
+
         Time.timeScale = 0f;
         isPaused = true;
 
@@ -70,8 +68,17 @@ public class Pause : MonoBehaviour
         Cursor.visible = true;
     }
 
+    public void Exit()
+    {
+        SceneManager.LoadScene("StartMenu");
+    }
+
     public void ResumeGame()
     {
+
+        if (PlayerCharacter != null)
+            PlayerCharacter.SetActive(true);
+
         if (mouseLookScript != null)
             mouseLookScript.enabled = true;
 
