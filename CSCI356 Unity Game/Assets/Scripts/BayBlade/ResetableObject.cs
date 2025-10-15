@@ -18,11 +18,13 @@ public class ResettableObject : MonoBehaviour
         if (useAlternate && alternateResetPoint != null)
         {
             // Move to alternate reset point
+            Debug.LogWarning("Player alternate.");
             transform.position = alternateResetPoint.position;
             transform.rotation = alternateResetPoint.rotation;
         }
         else
         {
+            Debug.LogWarning("normal");
             // Move to original start point
             transform.position = normalStartingPoint.position;
             transform.rotation = normalStartingPoint.rotation;
