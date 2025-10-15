@@ -14,6 +14,7 @@ EditorUserSettings:
     RecentlyUsedSceneGuid-2:
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       value: 5b0306045d565a585d580d7146750d444f4f1b73787e24697d7a1932bab96460
       flags: 0
     RecentlyUsedSceneGuid-3:
@@ -36,6 +37,10 @@ EditorUserSettings:
 =======
       value: 5b07065f0756510c545a5d7647775c44434f4a2e752e256428701c61b1b8623e
       flags: 0
+=======
+      value: 5b07065f0756510c545a5d7647775c44434f4a2e752e256428701c61b1b8623e
+      flags: 0
+>>>>>>> parent of b3cf9e8 (Revert "Added Saw Blades")
 =======
       value: 5b07065f0756510c545a5d7647775c44434f4a2e752e256428701c61b1b8623e
       flags: 0
