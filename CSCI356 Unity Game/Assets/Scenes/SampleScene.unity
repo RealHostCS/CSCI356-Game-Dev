@@ -1329,13 +1329,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 903353004}
     - target: {fileID: 2415326559131023540, guid: 11ba6cd8513922c4cb5dc5ad27f9f2fd, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2415326559131023540, guid: 11ba6cd8513922c4cb5dc5ad27f9f2fd, type: 3}
       propertyPath: moveThreshold
-      value: 0.9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 3668359743037134759, guid: 11ba6cd8513922c4cb5dc5ad27f9f2fd, type: 3}
       propertyPath: spawnPoint
       value: 
       objectReference: {fileID: 358206941}
+    - target: {fileID: 3671252197491038848, guid: 11ba6cd8513922c4cb5dc5ad27f9f2fd, type: 3}
+      propertyPath: Loop
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4936705905495215895, guid: 11ba6cd8513922c4cb5dc5ad27f9f2fd, type: 3}
       propertyPath: m_Name
       value: Player
