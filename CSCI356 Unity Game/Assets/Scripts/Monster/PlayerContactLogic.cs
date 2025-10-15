@@ -29,7 +29,7 @@ public class PlayerContactLogic : MonoBehaviour
         {
             playerColision = true;
 
-            var baybladeComponent = other.GetComponent<InventoryManager>();
+            var baybladeComponent = other.GetComponent<PlayerAttributes>();
             bool isBayblade = false;
             int CollectedBlades = 0;
             if (baybladeComponent != null)
@@ -40,7 +40,7 @@ public class PlayerContactLogic : MonoBehaviour
                 {
                     if (director != null)
                         baybladeComponent.CollectedBlades--;
-                        InventoryManager playerAttributes = player.GetComponent<InventoryManager>();
+                        PlayerAttributes playerAttributes = player.GetComponent<PlayerAttributes>();
                         updatePlayerUi.UpdateNumberCount(playerAttributes.CollectedBlades); 
                         director.Play();
                 }

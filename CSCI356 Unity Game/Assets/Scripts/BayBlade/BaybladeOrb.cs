@@ -23,7 +23,7 @@ public class BaybladeOrb : MonoBehaviour
 
     private void firstTimeCollectingOrb() 
     {
-        var playerAttributes = player.GetComponent<InventoryManager>();
+        var playerAttributes = player.GetComponent<PlayerAttributes>();
         updatePlayerUi.UpdateCollectionWords("Collected");
         if (baybladeImage != null)
                 updatePlayerUi.SetOrbImageTransparency(1f);
@@ -33,7 +33,7 @@ public class BaybladeOrb : MonoBehaviour
 
     private void OnTriggerEnter(Collider other) 
     {
-        var playerAttributes = player.GetComponent<InventoryManager>();
+        var playerAttributes = player.GetComponent<PlayerAttributes>();
         if(!playerAttributes.collectedBlade)
         {
             firstTimeCollectingOrb();
