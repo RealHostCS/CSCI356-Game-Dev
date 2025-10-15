@@ -16,6 +16,11 @@ public class InventoryManager : MonoBehaviour
     private int currentItem = 1;
     public bool hasKey;
     public int CurrentKey;
+    
+    [Header("Bayblade Level")]
+    public bool isBayblade = false;
+    public int CollectedBlades = 0;
+    public bool collectedBlade = false;
 
     
     void Start()
