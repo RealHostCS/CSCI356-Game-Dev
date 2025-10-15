@@ -6,7 +6,11 @@ public class PlayerAttributes : MonoBehaviour
     public int health = 100; // Example starting health
 
     public bool isDead = false; // Prevent multiple death triggers
-    
+
+    [Header("Bayblade Level")]
+    public bool isBayblade = false;
+    public int CollectedBlades = 0;
+    public bool collectedBlade = false;
 
     private PlayerMovement movement;
     void Awake()
