@@ -5,7 +5,7 @@ public class FootstepAudio : MonoBehaviour
     public AudioSource footstepSource;
 
     [Header("Movement Detection")]
-    public float moveThreshold = 0.1f; // min movement before footsteps play
+    public float moveThreshold = 0.5f; // min movement before footsteps play
 
     [Header("Pitch Settings")]
     public float minPitch = 0.9f;      // standing still
@@ -24,10 +24,12 @@ public class FootstepAudio : MonoBehaviour
         if (footstepSource == null) return;
 
         // Calculate speed from transform delta
-        float speed = (transform.position - lastPosition).magnitude / Time.deltaTime;
+        float speed = (transform.position - lastPosition).magnitude;
+        Debug.Log("Speed caluclated as: " + speed);
 
         if (speed > moveThreshold)
         {
+            Debug.Log("speed is greater than move threshhold: playing footstep");
             // Start footsteps if not already playing
             if (!footstepSource.isPlaying)
                 footstepSource.Play();
