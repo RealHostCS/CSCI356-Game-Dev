@@ -942,6 +942,8 @@ MonoBehaviour:
   moveSpeed: 10
   sprintSpeed: 18
   gravity: -9.81
+  friction: 1
+  playerSpeed: 1
   groundCheck: {fileID: 1473711476984179898}
   groundCheckDistance: 0.4
   groundMask:
@@ -1165,6 +1167,9 @@ MonoBehaviour:
   SprayCan: {fileID: 4829485545519606153}
   hasKey: 0
   CurrentKey: 0
+  isBayblade: 0
+  CollectedBlades: 0
+  collectedBlade: 0
 --- !u!54 &6098441670804789318
 Rigidbody:
   m_ObjectHideFlags: 0

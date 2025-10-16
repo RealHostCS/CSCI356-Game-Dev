@@ -7,9 +7,11 @@ public class PlayerMovement : MonoBehaviour
     public Transform spawnPoint;
 
     [Header("Movement Settings")]
-    public float moveSpeed = 5f;
-    public float sprintSpeed = 8f;
+    public float moveSpeed = 1f;
+    public float sprintSpeed = 1.6f;
     public float gravity = -9.81f;
+    public float friction = 1.0f;
+    public float playerSpeed = 1.0f;
 
     [Header("Ground Check Settings")]
     public Transform groundCheck;
@@ -53,16 +55,14 @@ public class PlayerMovement : MonoBehaviour
     private void HandleMovement()
     {
         // Get raw input for instant response
-        float horizontal = Input.GetAxisRaw("Horizontal");
-        float vertical = Input.GetAxisRaw("Vertical");
-
-        Vector3 inputDir = (transform.right * horizontal + transform.forward * vertical).normalized;
+        var dir = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
+        var vel = transform.TransformDirection(dir);
 
         // Determine current speed
         float speed = isSprinting ? sprintSpeed : moveSpeed;
 
         // Apply movement instantly (no slipping)
-        Vector3 move = inputDir * speed;
+        Vector3 move = dir * speed;
 
         // Gravity
         if (controller.isGrounded && velocity.y < 0f)
@@ -73,7 +73,28 @@ public class PlayerMovement : MonoBehaviour
         // Combine horizontal movement with vertical velocity
         Vector3 finalMove = move + new Vector3(0, velocity.y, 0);
 
-        controller.Move(finalMove * Time.deltaTime);
+        velocity = Vector3.Lerp(velocity, vel*speed, 15*friction*friction*Time.deltaTime);
+        controller.Move(velocity * playerSpeed * Time.deltaTime);
+    }
+
+    // For slowing effects
+    public void StartSlow(float degree)
+    {
+        playerSpeed = degree;
+    }
+    public void ResetSpeed()
+    {
+        playerSpeed = 1.0f;
+    }
+
+    // For slippery effects
+    public void SlipperyFriction()
+    {
+        friction = 0.15f;
+    }
+    public void ResetFriction()
+    {
+        friction = 1.0f;
     }
 
     #endregion
