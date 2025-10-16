@@ -13,9 +13,12 @@ GameObject:
   - component: {fileID: 608258904}
   - component: {fileID: 7099200672229238187}
   - component: {fileID: -6085861821116380952}
-  m_Layer: 0
+  - component: {fileID: 3239014834874137741}
+  - component: {fileID: 945674955851594483}
+  - component: {fileID: 2204266680299616086}
+  m_Layer: 7
   m_Name: Mimic
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -53,8 +56,8 @@ MonoBehaviour:
   partsPerLeg: 4
   legCount: 0
   deployedLegs: 0
-  minimumAnchoredLegs: 2
-  minimumAnchoredParts: 8
+  minimumAnchoredLegs: 8
+  minimumAnchoredParts: 32
   minLegLifetime: 5
   maxLegLifetime: 15
   legPlacerOrigin: {x: 0, y: 0, z: 0}
@@ -65,7 +68,7 @@ MonoBehaviour:
   minGrowCoef: 4.5
   maxGrowCoef: 6.5
   newLegCooldown: 0.3
-  velocity: {x: 0.9113374, y: 0, z: 0.24228118}
+  velocity: {x: -0.1222383, y: 0, z: -0.87303483}
 --- !u!114 &608258904
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -82,6 +85,9 @@ MonoBehaviour:
   velocityLerpCoef: 4
   target: {fileID: 0}
   stoppingDistance: 1.5
+  minDistance: 15
+  maxDistance: 25
+  hideDistance: 50
 --- !u!195 &7099200672229238187
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -125,6 +131,48 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 3, y: 3, z: 3}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3239014834874137741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8675915457954794080}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef3bc7aa0d941c64f99efa910a4be761, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  director: {fileID: 0}
+  playerColision: 0
+  updatePlayerUi: {fileID: 0}
+--- !u!114 &945674955851594483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8675915457954794080}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f378956567f34749bbf8fcafc4e1f59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentMonsterState: 4
+--- !u!114 &2204266680299616086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8675915457954794080}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0670d5cce67d6bd458b6b898d411a4ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  alternateResetPoint: {fileID: 0}
+  normalStartingPoint: {fileID: 0}
 --- !u!1 &8675915458194695971
 GameObject:
   m_ObjectHideFlags: 0
@@ -136,7 +184,7 @@ GameObject:
   - component: {fileID: 8675915458194695970}
   - component: {fileID: 8675915458194695975}
   - component: {fileID: 8675915458194695972}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -152,7 +200,7 @@ Transform:
   m_GameObject: {fileID: 8675915458194695971}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.19, z: 0}
   m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_ConstrainProportionsScale: 0
   m_Children: []

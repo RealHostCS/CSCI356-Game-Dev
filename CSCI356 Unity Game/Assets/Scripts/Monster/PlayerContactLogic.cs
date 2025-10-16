@@ -52,7 +52,7 @@ public class PlayerContactLogic : MonoBehaviour
         }
     }
 
-    private void HandlePlayerDeath(GameObject playerObj)
+    public void HandlePlayerDeath(GameObject playerObj)
     {
         // Get the PlayerAttributes script instead
         PlayerAttributes playerAttributes = playerObj.GetComponent<PlayerAttributes>();
@@ -68,7 +68,7 @@ public class PlayerContactLogic : MonoBehaviour
         }
     }
 
-    private IEnumerator StopTimelineAfterSeconds(float seconds)
+    public IEnumerator StopTimelineAfterSeconds(float seconds)
     {
         yield return new WaitForSeconds(seconds);
         director.Stop();
