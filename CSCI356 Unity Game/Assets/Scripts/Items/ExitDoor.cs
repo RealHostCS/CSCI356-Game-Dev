@@ -5,6 +5,7 @@ public class ExitDoor : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public int doorNumber;
+    public string sceneName;
     void Start()
     {
 
@@ -28,7 +29,7 @@ public class ExitDoor : MonoBehaviour
             InventoryManager player = other.GetComponent<InventoryManager>();
             if (player.hasKey == true & player.CurrentKey == doorNumber)
             {
-                SelectScene("SampleScene");
+                SelectScene(sceneName);
             }
         }
     }
