@@ -17,6 +17,8 @@ public class Enemy : MonoBehaviour
 
     private bool isFlashing = false;
 
+    public AudioSource SlimeHit;
+
 
     private SpriteRenderer spriteRenderer;
     private MeshRenderer meshRenderer;
@@ -36,6 +38,7 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(int amount)
     {
         currentHealth -= amount;
+        SlimeHit.Play();
 
         if (!isFlashing)
             StartCoroutine(Flash());
