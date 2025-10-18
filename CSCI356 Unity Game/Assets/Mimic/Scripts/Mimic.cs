@@ -63,7 +63,7 @@ namespace MimicSpace
             ResetMimic();
         }
 
-        private void ResetMimic()
+        void ResetMimic()
         {
             foreach (Leg g in GameObject.FindObjectsOfType<Leg>())
             {

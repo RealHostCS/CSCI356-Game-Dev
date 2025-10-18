@@ -22,6 +22,10 @@ public class InventoryManager : MonoBehaviour
     public int CollectedBlades = 0;
     public bool collectedBlade = false;
 
+    public int BaybladeBattlesWon = 0;
+    public int BaybladeBattlesLost = 0;
+
+
     
     void Start()
     {

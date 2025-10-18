@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class ResettableObject : MonoBehaviour
 {
@@ -14,24 +15,47 @@ public class ResettableObject : MonoBehaviour
     /// </summary>
     /// <param name="useAlternate">If true, reset to the alternate location.</param>
     public void ResetToStart(bool useAlternate = false)
-    {
-        if (useAlternate && alternateResetPoint != null)
-        {
-            // Move to alternate reset point
-            transform.position = alternateResetPoint.position;
-            transform.rotation = alternateResetPoint.rotation;
-        }
-        else
-        {
-            // Move to original start point
-            transform.position = normalStartingPoint.position;
-            transform.rotation = normalStartingPoint.rotation;
-        }
+{
+    StartCoroutine(ResetAfterLegsCleared(useAlternate));
+}
 
-        if (TryGetComponent<Rigidbody>(out var rb))
-        {
-            rb.linearVelocity = Vector3.zero;
-            rb.angularVelocity = Vector3.zero;
-        }
+private IEnumerator ResetAfterLegsCleared(bool useAlternate)
+{
+    if (TryGetComponent<MimicSpace.Mimic>(out var mimic))
+        mimic.SendMessage("ResetMimic", SendMessageOptions.DontRequireReceiver);
+
+    // Disable collider for safety
+    BoxCollider safeCollider = GetComponent<BoxCollider>();
+    if (safeCollider != null)
+        safeCollider.enabled = false;
+
+    // Wait one physics frame to clear legs
+    yield return new WaitForFixedUpdate();
+
+    if (TryGetComponent<Rigidbody>(out var rb))
+        rb.isKinematic = true;
+
+    Transform target = (useAlternate && alternateResetPoint != null)
+        ? alternateResetPoint
+        : normalStartingPoint;
+
+    transform.SetPositionAndRotation(target.position, target.rotation);
+
+    if (TryGetComponent<Rigidbody>(out var rb2))
+    {
+        rb2.isKinematic = false;
+        rb2.linearVelocity = Vector3.zero;
+        rb2.angularVelocity = Vector3.zero;
     }
+
+    // Wait 3 seconds before turning the collider back on
+    yield return new WaitForSeconds(3f);
+
+    if (safeCollider != null)
+        safeCollider.enabled = true;
+
+    Debug.Log($"Reset complete at {transform.position}");
+}
+
+
 }

@@ -40,12 +40,12 @@ public class SceneTransitionManager : MonoBehaviour
     }
 
 
-    public void ReturnFromMinigame()
+    public void ReturnFromMinigame(bool battleWon)
     {
-        StartCoroutine(UnloadMinigame());
+        StartCoroutine(UnloadMinigame(battleWon));
     }
 
-    private IEnumerator UnloadMinigame()
+    private IEnumerator UnloadMinigame(bool battleWon)
     {
         yield return SceneManager.UnloadSceneAsync(miniGameSceneName);
 
@@ -53,6 +53,19 @@ public class SceneTransitionManager : MonoBehaviour
         foreach (GameObject rootObj in mainScene.GetRootGameObjects())
         {
             rootObj.SetActive(true);
+        }
+
+        var playerInventory = Object.FindFirstObjectByType<InventoryManager>();
+        var battleUI = FindFirstObjectByType<BaybladeBattleResult>();
+        if (battleWon)
+        {
+            battleUI.ShowResult(battleWon);
+            playerInventory.BaybladeBattlesWon += 1;
+        }
+        else 
+        {
+            battleUI.ShowResult(battleWon);
+            playerInventory.BaybladeBattlesLost += 1;
         }
         // Reset every object that has a ResettableObject script
         foreach (var resettable in Object.FindObjectsByType<ResettableObject>(FindObjectsSortMode.None))
