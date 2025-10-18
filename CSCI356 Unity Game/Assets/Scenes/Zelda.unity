@@ -195,6 +195,7 @@ MonoBehaviour:
   flashDuration: 0.1
   maxFlash: 1
   SlimeHit: {fileID: 38933707}
+  statTracker: {fileID: 1847316043}
 --- !u!54 &38933704
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1669,6 +1670,7 @@ MonoBehaviour:
   flashDuration: 0.1
   maxFlash: 1
   SlimeHit: {fileID: 1445627399}
+  statTracker: {fileID: 1847316043}
 --- !u!65 &1445627404
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2181,6 +2183,7 @@ MonoBehaviour:
   flashDuration: 0.1
   maxFlash: 1
   SlimeHit: {fileID: 1739108093}
+  statTracker: {fileID: 1847316043}
 --- !u!65 &1739108098
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2227,6 +2230,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1847316042}
+  - component: {fileID: 1847316043}
   m_Layer: 0
   m_Name: StatTracker
   m_TagString: Untagged
@@ -2249,6 +2253,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1847316043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1847316041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea618e2773898334fa6eaf97eed64176, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemysKilled: 0
+  currentRoomNumber: 0
+  newRoomNumber: 0
 --- !u!1 &1943668900
 GameObject:
   m_ObjectHideFlags: 0
@@ -2448,6 +2467,7 @@ MonoBehaviour:
   flashDuration: 0.1
   maxFlash: 1
   SlimeHit: {fileID: 1943668901}
+  statTracker: {fileID: 1847316043}
 --- !u!65 &1943668906
 BoxCollider:
   m_ObjectHideFlags: 0
