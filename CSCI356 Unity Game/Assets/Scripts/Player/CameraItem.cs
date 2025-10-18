@@ -5,9 +5,9 @@ public class CameraItem : MonoBehaviour
 {
     public AudioSource sfxSource;
     public AudioClip onSound;
-    public Light flashLight;           // Assign a Light in the Inspector
-    public float flashDuration = 0.2f; // How long the flash lasts
-    public float cooldown = 5f;        // Cooldown between flashes
+    public Light flashLight;
+    public float flashDuration = 0.2f;
+    public float cooldown = 20f;
     public float rayDistance = 30f;
 
     private bool isCharging = false;
@@ -37,33 +37,25 @@ public class CameraItem : MonoBehaviour
         isCharging = true;
 
         // Flash the light
-        flashLight.enabled = true;
-        if (sfxSource != null && onSound != null)
-            sfxSource.PlayOneShot(onSound);
-        // Play ON sound
-        /*if (sfxSource != null && onSound != null)
-        {
-            sfxSource.PlayOneShot(onSound);           
-        }*/
+        if (flashLight != null) flashLight.enabled = true;
+        if (sfxSource != null && onSound != null) sfxSource.PlayOneShot(onSound);
         yield return new WaitForSeconds(flashDuration);
-        flashLight.enabled = false;
+        if (flashLight != null) flashLight.enabled = false;
 
-        // Use ray cast to check if monster in in light
+        // Raycast from the light forward
         var origin = flashLight != null ? flashLight.transform.position : transform.position;
         var dir    = flashLight != null ? flashLight.transform.forward  : transform.forward;
-        Ray ray = new Ray(origin, dir);
+
+        Debug.DrawRay(origin, dir * rayDistance, Color.white, 0.25f);
         Debug.Log("Sending raycast");
-        RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, rayDistance, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Collide))
+
+        if (Physics.Raycast(origin, dir, out RaycastHit hit, rayDistance, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Collide))
         {
-            if (hit.collider.CompareTag("Monster"))
+            var monster = hit.collider.GetComponent<MonsterStates>() ?? hit.collider.GetComponentInParent<MonsterStates>();
+            if (monster != null)
             {
-                // Example: tell the monster script to change state
-                MonsterStats monster = hit.collider.GetComponent<MonsterStats>();
-                if (monster != null)
-                {
-                    monster.Stun();
-                }
+                Debug.Log("Monster hit by flash!");
+                monster.Stun(3f);
             }
         }
 

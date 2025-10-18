@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using System.Collections;
 
 public class MonsterStates : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class MonsterStates : MonoBehaviour
         attack,
         hiding,
         stalk,
+        stunned,
         Null
     }
 
@@ -28,6 +30,10 @@ public class MonsterStates : MonoBehaviour
 
     private float stateTimer = 0f;          // how long we’ve been in current state
     private bool firstFrameInState = false; // flag for first frame of state
+
+    // Stun handling
+    private Coroutine stunRoutine;
+    private MonsterState stateBeforeStun = MonsterState.Null;
 
     void Start()
     {
@@ -65,10 +71,19 @@ public class MonsterStates : MonoBehaviour
             case MonsterState.stalk:
                 handleMonsterStateStalking();
                 break;
+            case MonsterState.stunned:
+                handleMonsterStateStunned();
+                break;
         }
 
         // Reset first-frame flag after Update runs once
         firstFrameInState = false;
+    }
+
+    public void Stun(float duration)
+    {
+        if (stunRoutine != null) StopCoroutine(stunRoutine);
+        stunRoutine = StartCoroutine(StunCo(duration));
     }
 
     // ------------------------
@@ -184,9 +199,39 @@ public class MonsterStates : MonoBehaviour
         }
     }
 
+    void handleMonsterStateStunned()
+    {
+        if (firstFrameInState)
+        {
+            Debug.Log("Entered Stunned state!");
+            if (agent)
+            {
+                agent.velocity = Vector3.zero;
+                agent.isStopped = true;
+            }
+        }
+    }
+
     // ------------------------
     // HELPERS
     // ------------------------
+
+    IEnumerator StunCo(float duration)
+    {
+        if (currentMonsterState != MonsterState.stunned)
+            stateBeforeStun = currentMonsterState;
+
+        ChangeState(MonsterState.stunned);
+
+        yield return new WaitForSeconds(duration);
+
+        if (agent) agent.isStopped = false;
+
+        var resume = stateBeforeStun != MonsterState.Null ? stateBeforeStun : MonsterState.stalk;
+        ChangeState(resume);
+
+        stunRoutine = null;
+    }
 
     void ChangeState(MonsterState newMonsterState)
     {
