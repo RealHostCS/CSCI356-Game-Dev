@@ -258,7 +258,7 @@ MonoBehaviour:
   onSound: {fileID: 8300000, guid: ddd8332ffe1e048e4bd482fb8fae28c7, type: 3}
   flashLight: {fileID: 8273537519574267783}
   flashDuration: 0.2
-  cooldown: 1
+  cooldown: 10
   rayDistance: 30
 --- !u!1 &1655705191989980491
 GameObject:
