@@ -591,6 +591,7 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 473541356}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+<<<<<<< Updated upstream
 --- !u!1 &480912097
 GameObject:
   m_ObjectHideFlags: 0
@@ -799,6 +800,8 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1432042939}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+=======
+>>>>>>> Stashed changes
 --- !u!1 &597855292
 GameObject:
   m_ObjectHideFlags: 0
@@ -985,14 +988,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 144928698895831633, guid: 160a688f1da304e4e9378cfd59416b40, type: 3}
-      propertyPath: m_Resource
-      value: 
-      objectReference: {fileID: 8300000, guid: 561ac757bce1a7a46a764de95fd5a3cb, type: 3}
-    - target: {fileID: 144928698895831633, guid: 160a688f1da304e4e9378cfd59416b40, type: 3}
-      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1853796019564759660, guid: 160a688f1da304e4e9378cfd59416b40, type: 3}
       propertyPath: m_Name
       value: Mud (Slow) 1
@@ -1188,6 +1183,7 @@ Transform:
   - {fileID: 260616102}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< Updated upstream
 --- !u!1001 &856074814
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1393,6 +1389,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageSound: {fileID: 595276984}
   damageVignette: {fileID: 1112852016}
+=======
+>>>>>>> Stashed changes
 --- !u!1 &1106436125
 GameObject:
   m_ObjectHideFlags: 0
@@ -1693,11 +1691,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3650678387409502845, guid: 17d734598d0a91c4db069b8f88e75ed7, type: 3}
   m_PrefabInstance: {fileID: 353836320}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &1432042939 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1218379749622002553, guid: 11ba6cd8513922c4cb5dc5ad27f9f2fd, type: 3}
-  m_PrefabInstance: {fileID: 1941476655}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1444380479
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1706,18 +1699,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 8727385273913548636, guid: 637e3550c2df6754987ee8db24f05ebd, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8727385273913548636, guid: 637e3550c2df6754987ee8db24f05ebd, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8727385273913548636, guid: 637e3550c2df6754987ee8db24f05ebd, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.2
-      objectReference: {fileID: 0}
     - target: {fileID: 8727385273913548636, guid: 637e3550c2df6754987ee8db24f05ebd, type: 3}
       propertyPath: m_LocalPosition.x
       value: -13.352671
@@ -1884,14 +1865,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2538569685935498938, guid: 7fd6c3a9a3777ea4fa2c46fc021fc8b7, type: 3}
-      propertyPath: m_Volume
-      value: 0.243
-      objectReference: {fileID: 0}
-    - target: {fileID: 2538569685935498938, guid: 7fd6c3a9a3777ea4fa2c46fc021fc8b7, type: 3}
-      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4346628983839186409, guid: 7fd6c3a9a3777ea4fa2c46fc021fc8b7, type: 3}
       propertyPath: m_LocalPosition.x
       value: -13.329954
@@ -1949,6 +1922,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3799948972154111376, guid: 11ba6cd8513922c4cb5dc5ad27f9f2fd, type: 3}
+      propertyPath: damageVignette
+      value: 
+      objectReference: {fileID: 1112852016}
     - target: {fileID: 4936705905495215895, guid: 11ba6cd8513922c4cb5dc5ad27f9f2fd, type: 3}
       propertyPath: m_Name
       value: Player
@@ -1995,17 +1972,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 1218379749622002553, guid: 11ba6cd8513922c4cb5dc5ad27f9f2fd, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 595276985}
-    - targetCorrespondingSourceObject: {fileID: 1218379749622002553, guid: 11ba6cd8513922c4cb5dc5ad27f9f2fd, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 879714284}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4936705905495215895, guid: 11ba6cd8513922c4cb5dc5ad27f9f2fd, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1075189350}
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 11ba6cd8513922c4cb5dc5ad27f9f2fd, type: 3}
 --- !u!1001 &791925641956614314
 PrefabInstance:
