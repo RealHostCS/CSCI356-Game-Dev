@@ -634,7 +634,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2541674544264000281}
-  m_Enabled: 0
+  m_Enabled: 1
 --- !u!114 &1610435182325755049
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -777,7 +777,7 @@ AudioSource:
   m_PlayOnAwake: 0
   m_Volume: 0.5
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -1364,7 +1364,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c8b2e0a551bed04eb60de83ff39f259, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 4936705905495215895}
 --- !u!1 &5587343880633068916
 GameObject:
   m_ObjectHideFlags: 0

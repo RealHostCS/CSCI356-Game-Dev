@@ -2242,10 +2242,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 746276358411452085, guid: 11ba6cd8513922c4cb5dc5ad27f9f2fd, type: 3}
-      propertyPath: isBayblade
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 746276358411452085, guid: 11ba6cd8513922c4cb5dc5ad27f9f2fd, type: 3}
       propertyPath: cameraImage
       value: 
       objectReference: {fileID: 417346341}
@@ -2301,10 +2297,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7114400039205622086, guid: 11ba6cd8513922c4cb5dc5ad27f9f2fd, type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 1613200407}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2394,11 +2386,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 174c37a83c60d754a97dfe30b200d521, type: 3}
---- !u!1 &1613200407 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4936705905495215895, guid: 11ba6cd8513922c4cb5dc5ad27f9f2fd, type: 3}
-  m_PrefabInstance: {fileID: 1454174623}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1638779179
 GameObject:
   m_ObjectHideFlags: 0
