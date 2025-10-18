@@ -68,6 +68,7 @@ public class ZeldaMove : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             anim.SetTrigger("Attack");
+            attackSound.pitch = UnityEngine.Random.Range(0.9f, 1.8f);
             attackSound.Play();
 
              if (hitboxPrefab != null)
