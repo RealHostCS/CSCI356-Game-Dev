@@ -1102,7 +1102,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8020282657544533637, guid: f1142ce5fe96475408410893091047c3, type: 3}
       propertyPath: sceneName
-      value: HaydensScene
+      value: SpaceStationHayden
       objectReference: {fileID: 0}
     - target: {fileID: 8179350378423525794, guid: f1142ce5fe96475408410893091047c3, type: 3}
       propertyPath: m_Name

@@ -9,6 +9,8 @@ public class ZeldaMove : MonoBehaviour
     public Animator anim;
     private Vector2 lastMoveDirection;
 
+    public AudioSource attackSound;
+
     private CharacterController controller;
 
     [Header("Attack")]
@@ -66,6 +68,7 @@ public class ZeldaMove : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             anim.SetTrigger("Attack");
+            attackSound.Play();
 
              if (hitboxPrefab != null)
             {
