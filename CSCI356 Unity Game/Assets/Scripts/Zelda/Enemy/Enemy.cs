@@ -40,6 +40,7 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(int amount)
     {
         currentHealth -= amount;
+        SlimeHit.pitch = UnityEngine.Random.Range(0.5f,1.8f);
         SlimeHit.Play();
 
         if (!isFlashing)
