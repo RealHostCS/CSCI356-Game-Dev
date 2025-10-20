@@ -4,9 +4,8 @@ public class PlayerAttributes : MonoBehaviour
 {
     [Header("Player Stats")]
     public int health = 100; // Example starting health
-    public AudioSource deathSound;
+
     public bool isDead = false; // Prevent multiple death triggers
-    public Dying dyingUI;
     
 
     private PlayerMovement movement;
@@ -45,8 +44,6 @@ public class PlayerAttributes : MonoBehaviour
     public void Die()
     {
         isDead = true; 
-        deathSound.Play();
-        dyingUI.ShowDeathScreen();
     }
 
     public void Heal(int degree) //For items/objects that heal

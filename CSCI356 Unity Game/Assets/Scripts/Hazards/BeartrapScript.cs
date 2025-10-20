@@ -5,7 +5,6 @@ public class BeartrapScript : MonoBehaviour
 {
     private Animator animator;
     private AudioSource sound;
-    private bool grabbed = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -28,11 +27,8 @@ public class BeartrapScript : MonoBehaviour
 
     private IEnumerator HoldInPlace(Collider collider)
     {
-        grabbed = true;
         yield return new WaitForSeconds(2.0f);
         collider.GetComponent<PlayerMovement>().ResetSpeed();
-        yield return new WaitForSeconds(1.0f);
-        grabbed = false;
         yield break;
     }
 }
