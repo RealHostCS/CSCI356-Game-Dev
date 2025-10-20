@@ -953,6 +953,8 @@ GameObject:
   - component: {fileID: 2415326559131023540}
   - component: {fileID: 746276358411452085}
   - component: {fileID: 6098441670804789318}
+  - component: {fileID: 7114400039205622086}
+  - component: {fileID: 7801954731088140030}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -1320,11 +1322,7 @@ MonoBehaviour:
   SprayCan: {fileID: 4829485545519606153}
   hasKey: 0
   CurrentKey: 0
-<<<<<<< HEAD
-  isBayblade: 1
-=======
   isBayblade: 0
->>>>>>> NewMain
   CollectedBlades: 0
   collectedBlade: 0
 --- !u!54 &6098441670804789318
@@ -1354,6 +1352,33 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &7114400039205622086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4936705905495215895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c8b2e0a551bed04eb60de83ff39f259, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 4936705905495215895}
+--- !u!114 &7801954731088140030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4936705905495215895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74a27247dbda14b4594f8b0256f84cf3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageSound: {fileID: 6339226751871922915}
+  damageVignetteFromUI: {fileID: 4306530624178895136}
 --- !u!1 &5587343880633068916
 GameObject:
   m_ObjectHideFlags: 0
