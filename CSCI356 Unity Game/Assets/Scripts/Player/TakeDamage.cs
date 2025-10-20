@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class TakeDamage : MonoBehaviour
 {
     public AudioSource damageSound;
-    public RawImage damageVignette;
+    public RawImage damageVignetteFromUI;
 
     public void StartDamage(int degree)
     {
@@ -15,10 +15,10 @@ public class TakeDamage : MonoBehaviour
     private IEnumerator TakeDamageEffect(int degree)
     {
         damageSound.Play();
-        damageVignette.enabled = true;
+        damageVignetteFromUI.enabled = true;
         gameObject.GetComponent<PlayerAttributes>().Damage(degree);
         yield return new WaitForSeconds(0.4f);
-        damageVignette.enabled = false;
+        damageVignetteFromUI.enabled = false;
         yield break;
     }
 }
