@@ -1,43 +1,63 @@
 using UnityEngine;
 
-public class SimpleFootsteps : MonoBehaviour
+public class FootstepAudio : MonoBehaviour
 {
     public AudioSource footstepSource;
-    public float speedThreshold = 0.1f;
 
-    CharacterController controller;
-    Rigidbody rb;
-    Vector3 lastPos;
+    [Header("Movement Detection")]
+    private float moveThreshold = 14f; // min movement before footsteps play
 
-    void Awake()
+    [Header("Pitch Settings")]
+    public float minPitch = 0.9f;      // standing still
+    public float maxPitch = 1.3f;      // max movement speed
+    public float maxSpeed = 18f;        // top speed of player
+
+    private Vector3 lastPosition;
+    private Rigidbody rb;
+
+    void Start()
     {
-        controller = GetComponent<CharacterController>();
+        lastPosition = transform.position;
         rb = GetComponent<Rigidbody>();
-        lastPos = transform.position;
     }
 
     void Update()
     {
-        if (!footstepSource) return;
+        if (footstepSource == null) return;
 
-        float speed = 0f;
+        // Prefer Rigidbody.velocity (accurate, in units/sec) when available.
+        float speed;
+        if (rb != null)
+        {
+            speed = rb.linearVelocity.magnitude;
+        }
+        else
+        {
+            // Fallback: estimate speed from transform delta. Guard against tiny dt.
+            float dt = Mathf.Max(Time.deltaTime, 1e-6f);
+            Vector3 delta = transform.position - lastPosition;
+            speed = delta.magnitude / dt;
+            lastPosition = transform.position;
+        }
 
-        if (controller)            speed = controller.velocity.magnitude;
-        else if (rb)               speed = rb.linearVelocity.magnitude;
-        else                       speed = ((transform.position - lastPos) / Mathf.Max(Time.deltaTime, 1e-6f)).magnitude;
+        speed = Mathf.Clamp(speed, 0f, maxSpeed);
 
-        lastPos = transform.position;
+        if (speed > moveThreshold)
+        {
+            // Start footsteps if not already playing
+            if (!footstepSource.isPlaying)
+                footstepSource.Play();
+                Debug.Log("Playing footstep sound at speed: " + speed);
 
-        bool moving = speed > speedThreshold;
-
-        if (moving && !footstepSource.isPlaying && controller.isGrounded)
-            footstepSource.Play();
-        else if (!moving && footstepSource.isPlaying)
-            footstepSource.Stop();
-    }
-
-    void OnDisable()
-    {
-        if (footstepSource) footstepSource.Stop();
+            // Adjust pitch based on speed
+            float t = Mathf.Clamp01(speed / maxSpeed);
+            footstepSource.pitch = Mathf.Lerp(minPitch, maxPitch, t);
+        }
+        else
+        {
+            if (footstepSource.isPlaying)
+                footstepSource.Stop();
+                Debug.Log("Stopping footstep sound due to low speed: " + speed);
+        }
     }
 }
