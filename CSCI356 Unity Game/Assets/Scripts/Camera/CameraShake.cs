@@ -3,19 +3,23 @@ using System.Collections;
 
 public class CameraShake : MonoBehaviour
 {
-    public static CameraShake Instance;   // singleton for easy access
+    public static CameraShake Instance;
 
-    private Vector3 originalPos;
+    public Vector3 ShakeOffset { get; private set; } = Vector3.zero;
+
+    private Coroutine shakeCoroutine;
 
     void Awake()
     {
         Instance = this;
-        originalPos = transform.localPosition;
     }
 
     public void Shake(float duration, float magnitude)
     {
-        StartCoroutine(ShakeRoutine(duration, magnitude));
+        if (shakeCoroutine != null)
+            StopCoroutine(shakeCoroutine);
+
+        shakeCoroutine = StartCoroutine(ShakeRoutine(duration, magnitude));
     }
 
     private IEnumerator ShakeRoutine(float duration, float magnitude)
@@ -24,15 +28,15 @@ public class CameraShake : MonoBehaviour
 
         while (elapsed < duration)
         {
-            float x = Random.Range(-3f, 3f) * magnitude;
-            float y = Random.Range(-3f, 3f) * magnitude;
+            float x = Random.Range(-2f, 2f) * magnitude;
+            float y = Random.Range(-2f, 2f) * magnitude;
 
-            transform.localPosition = originalPos + new Vector3(x, y, 0);
+            ShakeOffset = new Vector3(x, y, 0f);
 
             elapsed += Time.deltaTime;
             yield return null;
         }
 
-        transform.localPosition = originalPos; // reset to original
+        ShakeOffset = Vector3.zero;
     }
 }

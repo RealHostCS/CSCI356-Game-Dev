@@ -21,6 +21,12 @@ public class Hitbox : MonoBehaviour
         {
             enemy.TakeDamage(damage);
         }
+
+        Pot pot = other.GetComponent<Pot>();
+        if (pot != null)
+        {
+            pot.DestroyPot();
+        }
         
     }
 

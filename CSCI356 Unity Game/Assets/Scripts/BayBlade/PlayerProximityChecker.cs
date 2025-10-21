@@ -3,15 +3,13 @@ using UnityEngine;
 public class PlayerProximityChecker : MonoBehaviour
 {
     [Header("References")]
-    public Transform player;          // The player to check
-    public Transform targetLocation;  // The point to check distance to
+    public Transform player;        
+    public Transform targetLocation;  
 
     [Header("Settings")]
-    public float radius = 5f;         // The detection radius
+    public float radius = 5f;      
 
-    /// <summary>
-    /// Returns true if the player is within the radius of the targetLocation.
-    /// </summary>
+
     public bool IsPlayerInRange()
     {
         if (player == null || targetLocation == null)
@@ -24,7 +22,7 @@ public class PlayerProximityChecker : MonoBehaviour
         return distance <= radius;
     }
 
-    // Optional: draw the detection radius in the Scene view
+  
     void OnDrawGizmosSelected()
     {
         if (targetLocation != null)

@@ -40,9 +40,24 @@ public class PlayerAttributes : MonoBehaviour
             movement.enabled = !isDead;
     }
 
+
     public void Die()
     {
         isDead = true; 
+    }
+
+    public void Heal(int degree) //For items/objects that heal
+    {
+        health += degree;
+        if (health > 100)
+        {
+            health = 100;
+        }
+    }
+
+    public void Damage(int degree) //For items/objects that deal damage
+    {
+        health -= degree;
     }
 
 }

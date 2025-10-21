@@ -23,16 +23,16 @@ public class SceneTransitionManager : MonoBehaviour
     {
         mainScene = SceneManager.GetActiveScene();
 
-        // Pause main world
+       
        
 
-        // Hide everything in the main scene
+   
         foreach (GameObject rootObj in mainScene.GetRootGameObjects())
         {
             rootObj.SetActive(false);
         }
 
-        // Load minigame scene
+      
         yield return SceneManager.LoadSceneAsync(miniGameSceneName, LoadSceneMode.Additive);
 
         Scene miniGameScene = SceneManager.GetSceneByName(miniGameSceneName);
@@ -40,27 +40,40 @@ public class SceneTransitionManager : MonoBehaviour
     }
 
 
-    public void ReturnFromMinigame()
+    public void ReturnFromMinigame(bool battleWon)
     {
-        StartCoroutine(UnloadMinigame());
+        StartCoroutine(UnloadMinigame(battleWon));
     }
 
-    private IEnumerator UnloadMinigame()
+    private IEnumerator UnloadMinigame(bool battleWon)
     {
         yield return SceneManager.UnloadSceneAsync(miniGameSceneName);
 
-        // Reactivate everything in the main scene
+     
         foreach (GameObject rootObj in mainScene.GetRootGameObjects())
         {
             rootObj.SetActive(true);
         }
-        // Reset every object that has a ResettableObject script
+
+        var playerInventory = Object.FindFirstObjectByType<InventoryManager>();
+        var battleUI = FindFirstObjectByType<BaybladeBattleResult>();
+        if (battleWon)
+        {
+            battleUI.ShowResult(battleWon);
+            playerInventory.BaybladeBattlesWon += 1;
+        }
+        else 
+        {
+            battleUI.ShowResult(battleWon);
+            playerInventory.BaybladeBattlesLost += 1;
+        }
+      
         foreach (var resettable in Object.FindObjectsByType<ResettableObject>(FindObjectsSortMode.None))
         {
 
             resettable.ResetToStart(proximityChecker.IsPlayerInRange());
         }
-        // Resume g
+     
         SceneManager.SetActiveScene(mainScene);
     }
 

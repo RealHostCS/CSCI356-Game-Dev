@@ -17,6 +17,10 @@ public class Enemy : MonoBehaviour
 
     private bool isFlashing = false;
 
+    public AudioSource SlimeHit;
+
+    public StatTracker statTracker;
+
 
     private SpriteRenderer spriteRenderer;
     private MeshRenderer meshRenderer;
@@ -36,6 +40,8 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(int amount)
     {
         currentHealth -= amount;
+        SlimeHit.pitch = UnityEngine.Random.Range(0.8f, 1.5f);
+        SlimeHit.Play();
 
         if (!isFlashing)
             StartCoroutine(Flash());
@@ -44,7 +50,10 @@ public class Enemy : MonoBehaviour
             CameraShake.Instance.Shake(0.15f, 0.1f);
             
         if (currentHealth <= 0)
+        {
             Destroy(gameObject);
+            statTracker.AddEnemyKilled();
+        }
     }
 
     private IEnumerator Flash()
