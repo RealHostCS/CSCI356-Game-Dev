@@ -7,15 +7,18 @@ public class CameraFollow : MonoBehaviour
     public float cameraSpeed = 5f;   // Smooth camera movement speed
 
     private Vector3 velocity = Vector3.zero;
-
-    
+    private float zOffset;
 
     void Start()
     {
         if (player == null)
         {
             Debug.LogError("CameraFollow: Player transform not assigned.");
+            return;
         }
+
+        // Store initial Z offset between camera and player
+        zOffset = transform.position.z - player.position.z;
     }
 
     void LateUpdate()
@@ -30,24 +33,26 @@ public class CameraFollow : MonoBehaviour
             Mathf.Abs(playerPosition.y - cameraPosition.y)
         );
 
-        Vector3 newPosition = cameraPosition;
+        // Start with Z matching player's Z with offset
+        Vector3 newPosition = new Vector3(cameraPosition.x, cameraPosition.y, playerPosition.z + zOffset);
 
-        // Check if player has moved beyond the threshold horizontally
+        // Move horizontally if beyond threshold
         if (difference.x >= threshold.x)
         {
             newPosition.x = playerPosition.x - Mathf.Sign(playerPosition.x - cameraPosition.x) * threshold.x;
         }
 
-        // Check if player has moved beyond the threshold vertically
+        // Move vertically if beyond threshold
         if (difference.y >= threshold.y)
         {
             newPosition.y = playerPosition.y - Mathf.Sign(playerPosition.y - cameraPosition.y) * threshold.y;
         }
 
+        // Smoothly move camera
         Vector3 smoothedPosition = Vector3.SmoothDamp(cameraPosition, newPosition, ref velocity, 1f / cameraSpeed);
 
-        // Smoothly move camera to the new position
-        transform.position = smoothedPosition + CameraShake.Instance?.ShakeOffset ?? Vector3.zero;
+        // Add optional camera shake offset
+        transform.position = smoothedPosition + (CameraShake.Instance?.ShakeOffset ?? Vector3.zero);
     }
 
     // Optional: draw the threshold area in the editor
