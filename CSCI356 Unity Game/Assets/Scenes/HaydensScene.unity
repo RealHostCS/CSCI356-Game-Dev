@@ -119,7 +119,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1001 &160583159
+--- !u!1001 &94363379
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -133,15 +133,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3650678387409502845, guid: 17d734598d0a91c4db069b8f88e75ed7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -683.4624
+      value: 110.36983
       objectReference: {fileID: 0}
     - target: {fileID: 3650678387409502845, guid: 17d734598d0a91c4db069b8f88e75ed7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -1.99997
       objectReference: {fileID: 0}
     - target: {fileID: 3650678387409502845, guid: 17d734598d0a91c4db069b8f88e75ed7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 868
+      value: -677.86505
       objectReference: {fileID: 0}
     - target: {fileID: 3650678387409502845, guid: 17d734598d0a91c4db069b8f88e75ed7, type: 3}
       propertyPath: m_LocalRotation.w
@@ -176,11 +176,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 17d734598d0a91c4db069b8f88e75ed7, type: 3}
---- !u!1 &160583160 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7005865966969753851, guid: 17d734598d0a91c4db069b8f88e75ed7, type: 3}
-  m_PrefabInstance: {fileID: 160583159}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &244289773
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -315,11 +310,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3fc537e92bf3d2449b5be72cfd6cb447, type: 3}
---- !u!1 &287564119 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8769559644106496052, guid: 17d734598d0a91c4db069b8f88e75ed7, type: 3}
-  m_PrefabInstance: {fileID: 160583159}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &331277385
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1029,7 +1019,7 @@ PrefabInstance:
     - target: {fileID: 8020282657544533637, guid: f1142ce5fe96475408410893091047c3, type: 3}
       propertyPath: loadingScreen
       value: 
-      objectReference: {fileID: 160583160}
+      objectReference: {fileID: 0}
     - target: {fileID: 8179350378423525794, guid: f1142ce5fe96475408410893091047c3, type: 3}
       propertyPath: m_Name
       value: ExitDoor
@@ -1842,11 +1832,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 174c37a83c60d754a97dfe30b200d521, type: 3}
---- !u!1 &1060827146 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7934361675661841940, guid: 17d734598d0a91c4db069b8f88e75ed7, type: 3}
-  m_PrefabInstance: {fileID: 160583159}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1062754551
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2103,11 +2088,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2d2d167153da0e44fa723049716d38ab, type: 3}
---- !u!1 &1356522823 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8343427646260814227, guid: 17d734598d0a91c4db069b8f88e75ed7, type: 3}
-  m_PrefabInstance: {fileID: 160583159}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1425298940
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2329,15 +2309,15 @@ PrefabInstance:
     - target: {fileID: 746276358411452085, guid: 11ba6cd8513922c4cb5dc5ad27f9f2fd, type: 3}
       propertyPath: cameraImage
       value: 
-      objectReference: {fileID: 287564119}
+      objectReference: {fileID: 0}
     - target: {fileID: 746276358411452085, guid: 11ba6cd8513922c4cb5dc5ad27f9f2fd, type: 3}
       propertyPath: sprayCanImage
       value: 
-      objectReference: {fileID: 1060827146}
+      objectReference: {fileID: 0}
     - target: {fileID: 746276358411452085, guid: 11ba6cd8513922c4cb5dc5ad27f9f2fd, type: 3}
       propertyPath: flashlightImage
       value: 
-      objectReference: {fileID: 1356522823}
+      objectReference: {fileID: 0}
     - target: {fileID: 4936705905495215895, guid: 11ba6cd8513922c4cb5dc5ad27f9f2fd, type: 3}
       propertyPath: m_Name
       value: Player
@@ -3029,11 +3009,11 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 94363379}
   - {fileID: 4786963637750986047}
   - {fileID: 1606793057}
   - {fileID: 741624079}
   - {fileID: 1628153354}
-  - {fileID: 160583159}
   - {fileID: 602333322}
   - {fileID: 998741106}
   - {fileID: 424407047}
