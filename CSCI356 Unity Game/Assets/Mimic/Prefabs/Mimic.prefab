@@ -68,7 +68,7 @@ MonoBehaviour:
   minGrowCoef: 4.5
   maxGrowCoef: 6.5
   newLegCooldown: 0.3
-  velocity: {x: -0.1222383, y: 0, z: -0.87303483}
+  velocity: {x: -0.0103898905, y: 0, z: -0.60049117}
 --- !u!114 &608258904
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -85,8 +85,8 @@ MonoBehaviour:
   velocityLerpCoef: 4
   target: {fileID: 0}
   stoppingDistance: 1.5
-  minDistance: 15
-  maxDistance: 25
+  minDistance: 30
+  maxDistance: 40
   hideDistance: 50
 --- !u!195 &7099200672229238187
 NavMeshAgent:
