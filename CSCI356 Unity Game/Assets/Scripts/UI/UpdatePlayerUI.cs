@@ -16,7 +16,7 @@ public class UpdatePlayerUI : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
-    // 🟩 Updates the orb image shown on screen
+   
     public void UpdateOrbImage(Sprite newSprite)
     {
         if (orbImage != null && newSprite != null)
@@ -28,19 +28,19 @@ public class UpdatePlayerUI : MonoBehaviour
         if (orbImage != null)
         {
             Color currentColor = orbImage.color;
-            currentColor.a = Mathf.Clamp01(value); // ensures the value stays between 0 and 1
+            currentColor.a = Mathf.Clamp01(value); 
             orbImage.color = currentColor;
         }
     }
 
-    // 🟩 Updates the number text (e.g., number of orbs collected)
+  
     public void UpdateNumberCount(int number)
     {
         if (numberCount != null)
             numberCount.text = number.ToString();
     }
 
-    // 🟩 Updates the descriptive text (e.g., “Collected!”, “Orb Found!”, etc.)
+  )
     public void UpdateCollectionWords(string words)
     {
         if (collectionWords != null)

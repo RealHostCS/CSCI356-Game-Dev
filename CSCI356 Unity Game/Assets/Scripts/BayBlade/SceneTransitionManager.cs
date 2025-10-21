@@ -23,16 +23,16 @@ public class SceneTransitionManager : MonoBehaviour
     {
         mainScene = SceneManager.GetActiveScene();
 
-        // Pause main world
+       
        
 
-        // Hide everything in the main scene
+   
         foreach (GameObject rootObj in mainScene.GetRootGameObjects())
         {
             rootObj.SetActive(false);
         }
 
-        // Load minigame scene
+      
         yield return SceneManager.LoadSceneAsync(miniGameSceneName, LoadSceneMode.Additive);
 
         Scene miniGameScene = SceneManager.GetSceneByName(miniGameSceneName);
@@ -49,7 +49,7 @@ public class SceneTransitionManager : MonoBehaviour
     {
         yield return SceneManager.UnloadSceneAsync(miniGameSceneName);
 
-        // Reactivate everything in the main scene
+     
         foreach (GameObject rootObj in mainScene.GetRootGameObjects())
         {
             rootObj.SetActive(true);
@@ -67,13 +67,13 @@ public class SceneTransitionManager : MonoBehaviour
             battleUI.ShowResult(battleWon);
             playerInventory.BaybladeBattlesLost += 1;
         }
-        // Reset every object that has a ResettableObject script
+      
         foreach (var resettable in Object.FindObjectsByType<ResettableObject>(FindObjectsSortMode.None))
         {
 
             resettable.ResetToStart(proximityChecker.IsPlayerInRange());
         }
-        // Resume g
+     
         SceneManager.SetActiveScene(mainScene);
     }
 

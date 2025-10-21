@@ -20,11 +20,11 @@ public class CheckBattles : MonoBehaviour
     void Update()
     {
         
-        if (player == null) return; // safety check
+        if (player == null) return;
 
         var playerInventory = player.GetComponent<InventoryManager>();
         var MonterContact = mimic.GetComponent<PlayerContactLogic>();
-        if (playerInventory == null) return; // safety check
+        if (playerInventory == null) return; 
 
         if (playerInventory.BaybladeBattlesWon >= 3)
         {

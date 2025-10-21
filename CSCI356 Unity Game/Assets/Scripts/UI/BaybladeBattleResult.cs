@@ -5,11 +5,9 @@ using System.Collections;
 public class BaybladeBattleResult : MonoBehaviour
 {
     [Header("UI Text")]
-    public TextMeshProUGUI resultText; // assign in inspector
+    public TextMeshProUGUI resultText; 
 
-    /// <summary>
-    /// Call this method when the battle ends.
-    /// </summary>
+
     /// <param name="didWin">True if player won, false if lost.</param>
     public void ShowResult(bool didWin)
     {
