@@ -1445,6 +1445,10 @@ PrefabInstance:
       propertyPath: sceneName
       value: HaydensScene
       objectReference: {fileID: 0}
+    - target: {fileID: 8020282657544533637, guid: f1142ce5fe96475408410893091047c3, type: 3}
+      propertyPath: loadingScreen
+      value: 
+      objectReference: {fileID: 1592540111}
     - target: {fileID: 8179350378423525794, guid: f1142ce5fe96475408410893091047c3, type: 3}
       propertyPath: m_Name
       value: ExitDoor
@@ -1690,6 +1694,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 17d734598d0a91c4db069b8f88e75ed7, type: 3}
+--- !u!1 &1592540111 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7005865966969753851, guid: 17d734598d0a91c4db069b8f88e75ed7, type: 3}
+  m_PrefabInstance: {fileID: 1592540110}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1946430721 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4973311310826476473, guid: b45f9ea2b33f7cb4e88aad55933c3c42, type: 3}

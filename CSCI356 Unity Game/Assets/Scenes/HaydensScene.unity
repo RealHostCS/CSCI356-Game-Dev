@@ -176,6 +176,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 17d734598d0a91c4db069b8f88e75ed7, type: 3}
+--- !u!1 &160583160 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7005865966969753851, guid: 17d734598d0a91c4db069b8f88e75ed7, type: 3}
+  m_PrefabInstance: {fileID: 160583159}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &287564119 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8769559644106496052, guid: 17d734598d0a91c4db069b8f88e75ed7, type: 3}
@@ -237,6 +242,10 @@ PrefabInstance:
       propertyPath: sceneName
       value: Bayblade_Level
       objectReference: {fileID: 0}
+    - target: {fileID: 8020282657544533637, guid: f1142ce5fe96475408410893091047c3, type: 3}
+      propertyPath: loadingScreen
+      value: 
+      objectReference: {fileID: 160583160}
     - target: {fileID: 8179350378423525794, guid: f1142ce5fe96475408410893091047c3, type: 3}
       propertyPath: m_Name
       value: ExitDoor
