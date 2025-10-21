@@ -634,7 +634,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2541674544264000281}
-  m_Enabled: 0
+  m_Enabled: 1
 --- !u!114 &1610435182325755049
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1296,7 +1296,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   footstepSource: {fileID: 3671252197491038848}
-  moveThreshold: 0.1
   minPitch: 0.6
   maxPitch: 1.6
   maxSpeed: 18
@@ -1324,6 +1323,8 @@ MonoBehaviour:
   isBayblade: 0
   CollectedBlades: 0
   collectedBlade: 0
+  BaybladeBattlesWon: 0
+  BaybladeBattlesLost: 0
 --- !u!54 &6098441670804789318
 Rigidbody:
   m_ObjectHideFlags: 0
