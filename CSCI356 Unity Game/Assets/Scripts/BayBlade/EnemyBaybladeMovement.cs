@@ -11,14 +11,14 @@ public class EnemyBaybladeMovement : MonoBehaviour, IBayblade
     public Transform Transform => transform;
 
     [Header("Target")]
-    public Transform target; // assign player or another Beyblade
+    public Transform target; 
 
     [Header("Movement Settings")]
     public float baseMoveSpeed = 250f;
     public float moveSpeed;
     public float gravity = -200f;
     public float groundStickForce = -200f;
-    public float rotationSpeed = 100f; // how fast it turns toward player
+    public float rotationSpeed = 100f; 
 
     [Header("Spin Settings")]
     public Transform spinObject;
@@ -46,7 +46,7 @@ public class EnemyBaybladeMovement : MonoBehaviour, IBayblade
 
     [Header("AI Movement Behaviour")]
     public float stopDistance = 2f;
-    public float orbitIntensity = 0.5f; // how much it circles around the player
+    public float orbitIntensity = 0.5f;
 
      public void AddRecoil(Vector3 recoil)
     {
@@ -65,7 +65,7 @@ public class EnemyBaybladeMovement : MonoBehaviour, IBayblade
 
     void Update()
     {
-        UpdateDynamicSpeed();  // 🧠 New function
+        UpdateDynamicSpeed();  
         HandleMovement();
         HandleSpin();
     }
@@ -74,8 +74,8 @@ public class EnemyBaybladeMovement : MonoBehaviour, IBayblade
     {
         while (true)
         {
-            yield return new WaitForSeconds(0.5f); // wait half a second
-            RemoveSpin(1f); // remove spin
+            yield return new WaitForSeconds(0.5f);
+            RemoveSpin(1f); 
         }
     }
 
@@ -85,13 +85,14 @@ public class EnemyBaybladeMovement : MonoBehaviour, IBayblade
         {
             spinSpeed = 0f;
             Debug.Log("Enemy Spin has reached 0!");
-            Object.FindFirstObjectByType<SceneTransitionManager>().ReturnFromMinigame();
+            bool battleWon = true;
+            Object.FindFirstObjectByType<SceneTransitionManager>().ReturnFromMinigame(battleWon);
         }
         else
         {
             spinSpeed -= amount;
-            if (spinSpeed < 0f) spinSpeed = 0f; // clamp
-            healthBar.SetHealth((spinSpeed/maxSpinSpeed)*100); // call TakeDamage from HealthBar
+            if (spinSpeed < 0f) spinSpeed = 0f; 
+            healthBar.SetHealth((spinSpeed/maxSpinSpeed)*100); 
         }
     }
 
@@ -100,7 +101,7 @@ public class EnemyBaybladeMovement : MonoBehaviour, IBayblade
         RemoveSpin(10f);
     }
 
-    private Vector3 smoothedNormal = Vector3.up; // keeps previous normal
+    private Vector3 smoothedNormal = Vector3.up; 
 
 
     void HandleMovement()
@@ -114,7 +115,7 @@ public class EnemyBaybladeMovement : MonoBehaviour, IBayblade
     Vector3 GetTargetDirection()
     {
         Vector3 dir = (target.position - transform.position);
-        dir.y = 0f; // keep on same plane
+        dir.y = 0f; 
         float distance = dir.magnitude;
 
         if (distance < stopDistance)
@@ -123,11 +124,11 @@ public class EnemyBaybladeMovement : MonoBehaviour, IBayblade
         {
             dir.Normalize();
 
-            // Orbiting effect (adds unpredictability)
+            
             dir = Quaternion.Euler(0, Mathf.Sin(Time.time * 2f) * orbitIntensity * 30f, 0) * dir;
         }
 
-        // Smoothly face the target
+     
         if (dir != Vector3.zero)
         {
             Quaternion targetRot = Quaternion.LookRotation(dir);
@@ -141,22 +142,22 @@ public class EnemyBaybladeMovement : MonoBehaviour, IBayblade
 {
     float deltaY = transform.position.y - lastYPosition;
 
-    // If moving up → lose speed; if moving down → gain speed
+    
     if (Mathf.Abs(deltaY) > 0.001f)
     {
-        float adjustment = -deltaY * speedChangeRate; // negative when going up
+        float adjustment = -deltaY * speedChangeRate;
         currentMoveSpeed += adjustment * Time.deltaTime;
     }
 
-    // Smoothly return toward base speed
+
     currentMoveSpeed = Mathf.Lerp(currentMoveSpeed, baseMoveSpeed, Time.deltaTime * speedReturnRate);
 
-    // Clamp to min/max
+    
     float minSpeed = baseMoveSpeed * minSpeedPenalty;
     float maxSpeed = baseMoveSpeed * maxSpeedBoost;
     currentMoveSpeed = Mathf.Clamp(currentMoveSpeed, minSpeed, maxSpeed);
 
-    // Apply to actual move speed
+   
     moveSpeed = currentMoveSpeed;
 
     lastYPosition = transform.position.y;
@@ -179,7 +180,7 @@ public class EnemyBaybladeMovement : MonoBehaviour, IBayblade
             targetNormal = hit.normal;
 
         float tiltSpeed = 10f;
-        if (Vector3.Dot(move, transform.forward) < 0f) tiltSpeed = 20f; // faster when moving backward
+        if (Vector3.Dot(move, transform.forward) < 0f) tiltSpeed = 20f; 
         smoothedNormal = Vector3.Lerp(smoothedNormal, targetNormal, Time.deltaTime * tiltSpeed);
     }
 

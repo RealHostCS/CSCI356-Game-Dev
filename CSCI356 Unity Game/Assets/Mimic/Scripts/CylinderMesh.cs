@@ -37,7 +37,7 @@ namespace MimicSpace
             Vector3 circleNormal;
             Vector3 perpendicularVector;
 
-            // Set Vertices
+
             for (int i = 0; i < myLine.positionCount - 1; i++)
             {
                 circleNormal = (myLine.GetPosition(i + 1) - myLine.GetPosition(i)).normalized;
@@ -52,7 +52,7 @@ namespace MimicSpace
             }
             vertices.Add(transform.InverseTransformPoint(myLine.GetPosition(myLine.positionCount - 1)));
 
-            // Set Triangles
+
             for (int i = 0; i < myLine.positionCount - 2; i++)
             {
                 for (int j = 0; j < verticeCount; j++)

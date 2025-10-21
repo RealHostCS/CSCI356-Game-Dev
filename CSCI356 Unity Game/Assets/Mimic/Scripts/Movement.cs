@@ -18,7 +18,7 @@ namespace MimicSpace
         public float velocityLerpCoef = 4f;
 
         [Header("Navigation Settings")]
-        public Transform target; // Assign your player or another object here
+        public Transform target; 
         public float stoppingDistance = 1.5f;
 
         [Header("Stalk Settings")]
@@ -40,7 +40,7 @@ namespace MimicSpace
             myMimic = GetComponent<Mimic>();
             MonsterStates = GetComponent<MonsterStates>();
 
-            // Sync agent speed with Mimic speed for consistency
+          
             agent.speed = agent.speed == 0 ? 5f : agent.speed;
             agent.stoppingDistance = stoppingDistance;
         }
@@ -49,7 +49,7 @@ namespace MimicSpace
         {
             if (MonsterStates != null)
             {
-                // Pass the enum state to OnStateUpdate
+           
                 if (MonsterStates.currentMonsterState == MonsterStates.MonsterState.hiding && !hidingSpotFound)
                 {
                     OnStateUpdate(MonsterStates.currentMonsterState);
@@ -63,16 +63,16 @@ namespace MimicSpace
             }
 
 
-            // Calculate local velocity based on NavMeshAgent movement
+          
             Vector3 desiredVelocity = agent.velocity;
 
-            // Smooth out velocity transitions
+         
             velocity = Vector3.Lerp(velocity, desiredVelocity, velocityLerpCoef * Time.deltaTime);
 
-            // Update Mimic for proper leg animations
+           
             myMimic.velocity = new Vector3(velocity.x, 0, velocity.z);
 
-            // Keep the monster grounded at the proper height
+         
             AdjustHeight();
         }
 
@@ -98,10 +98,10 @@ namespace MimicSpace
                     break;
 
                 case MonsterStates.MonsterState.scared:
-                    // Direction away from the target
+ 
                     Vector3 fleeDirection = (transform.position - target.position).normalized;
 
-                    // Pick a point some distance away (e.g., 10 units away)
+    
                     Vector3 fleePosition = transform.position + fleeDirection * 10f;
 
                     agent.SetDestination(fleePosition);
@@ -118,23 +118,23 @@ namespace MimicSpace
 
                 if (distance < minDistance)
                 {
-                    // Too close -> move back out
+          
                     Vector3 retreatDir = (transform.position - target.position).normalized;
                     Vector3 retreatPos = target.position + retreatDir * minDistance;
                     agent.SetDestination(retreatPos);
                 }
                 else if (distance > maxDistance)
                 {
-                    // Too far -> move closer
+                  
                     agent.SetDestination(target.position);
                 }
                 else
                 {
-                    // In stalk zone -> orbit around the player
-                    float orbitSpeed = 40f; // degrees per second
+           
+                    float orbitSpeed = 40f;
                     float angle = orbitSpeed * Time.time; 
 
-                    // Pick a point on a circle around the player
+                
                     Vector3 orbitOffset = new Vector3(
                         Mathf.Cos(angle * Mathf.Deg2Rad),
                         0,
