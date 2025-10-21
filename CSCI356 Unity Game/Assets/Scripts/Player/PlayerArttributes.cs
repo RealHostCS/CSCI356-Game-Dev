@@ -6,6 +6,7 @@ public class PlayerAttributes : MonoBehaviour
     public int health = 100; // Example starting health
     public AudioSource deathSound;
     public bool isDead = false; // Prevent multiple death triggers
+    private GameObject ui;
     
 
     private PlayerMovement movement;
@@ -18,6 +19,7 @@ public class PlayerAttributes : MonoBehaviour
     {
         health = 100;
         isDead = false;
+        ui = GameObject.FindGameObjectWithTag("UI");
 
         // Cache PlayerMovement
         movement = GetComponent<PlayerMovement>();
@@ -45,6 +47,7 @@ public class PlayerAttributes : MonoBehaviour
     {
         isDead = true; 
         deathSound.Play();
+        ui.GetComponent<Dying>().ShowDeathScreen();
     }
 
     public void Heal(int degree) //For items/objects that heal
