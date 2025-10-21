@@ -622,6 +622,10 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 658636723}
+    - target: {fileID: 3239014834874137741, guid: 3fc537e92bf3d2449b5be72cfd6cb447, type: 3}
+      propertyPath: updatePlayerUi
+      value: 
+      objectReference: {fileID: 980874455}
     - target: {fileID: 8675915457954794080, guid: 3fc537e92bf3d2449b5be72cfd6cb447, type: 3}
       propertyPath: m_Name
       value: Mimic
@@ -865,6 +869,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 11fed2c3164e0bd419bad5a1d1a98a04, type: 3}
+--- !u!114 &980874455 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6018843755227604828, guid: 17d734598d0a91c4db069b8f88e75ed7, type: 3}
+  m_PrefabInstance: {fileID: 2206184913905927194}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adf872bac62c0ac4ca8f475dbf726d04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1306369520 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8769559644106496052, guid: 17d734598d0a91c4db069b8f88e75ed7, type: 3}
