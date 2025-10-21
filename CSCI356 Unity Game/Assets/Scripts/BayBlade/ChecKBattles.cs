@@ -6,6 +6,8 @@ public class CheckBattles : MonoBehaviour
     public GameObject player;
     private GameObject mimic;
 
+    public GameObject loadingScreen;
+
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -26,6 +28,7 @@ public class CheckBattles : MonoBehaviour
 
         if (playerInventory.BaybladeBattlesWon >= 3)
         {
+            loadingScreen.SetActive(true); 
            SceneManager.LoadScene("Zelda");
         }
         else if (playerInventory.BaybladeBattlesLost >= 3)
