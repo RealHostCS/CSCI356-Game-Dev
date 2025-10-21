@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
-    public Image fillImage; // Assign HealthBarFill
+    public Image fillImage; 
     public float maxHealth = 100f;
     public float currentHealth = 100f;
 

@@ -15,7 +15,7 @@ public class CutsceneVisibility : MonoBehaviour
 
         if (director != null)
         {
-            // prevent double subscriptions
+       
             director.played -= OnCutsceneStart;
             director.stopped -= OnCutsceneEnd;
 
@@ -33,17 +33,17 @@ public class CutsceneVisibility : MonoBehaviour
         }
     }
 
-    // Called when Timeline starts playing
+
     void OnCutsceneStart(PlayableDirector d)
     {
-        Time.timeScale = 0f; // freeze gameplay
+        Time.timeScale = 0f; 
         director.timeUpdateMode = DirectorUpdateMode.UnscaledGameTime;
 
         if (cutsceneRoot != null)
         {
             cutsceneRoot.SetActive(true);
 
-            // enable all animators and set to unscaled time
+   
             foreach (var anim in cutsceneRoot.GetComponentsInChildren<Animator>(true))
             {
                 anim.enabled = true;
@@ -54,7 +54,7 @@ public class CutsceneVisibility : MonoBehaviour
         }
     }
 
-    // Called when Timeline stops
+
     void OnCutsceneEnd(PlayableDirector d)
     {
         StartCoroutine(CleanupAfterTimeline());
@@ -62,10 +62,10 @@ public class CutsceneVisibility : MonoBehaviour
 
     private IEnumerator CleanupAfterTimeline()
     {
-        // wait for one frame so timeline finishes fully
+  
         yield return null;
 
-        Time.timeScale = 1f; // unfreeze gameplay
+        Time.timeScale = 1f; 
 
         if (director != null)
         {
@@ -85,7 +85,7 @@ public class CutsceneVisibility : MonoBehaviour
             cutsceneRoot.SetActive(false);
         }
 
-        // Start the next stage (like your minigame)
+  
         var transition = FindFirstObjectByType<SceneTransitionManager>();
         if (transition != null)
             transition.StartMinigame();
@@ -95,7 +95,7 @@ public class CutsceneVisibility : MonoBehaviour
     {
         if (cutsceneRoot == null) return;
 
-        // ensure cutscene objects are off and animators reset
+    
         foreach (var anim in cutsceneRoot.GetComponentsInChildren<Animator>(true))
         {
             anim.enabled = false;

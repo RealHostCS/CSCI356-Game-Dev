@@ -84,14 +84,14 @@ public class BaybladeMovement : MonoBehaviour, IBayblade
     {
         while (true)
         {
-            yield return new WaitForSeconds(0.5f); // wait half a second
+            yield return new WaitForSeconds(0.5f); 
             if (Input.GetKey(sprintKey))
             {
-                RemoveSpin(3f); // remove spin
+                RemoveSpin(3f); 
             }
             else
             {
-                RemoveSpin(1f); // remove spin
+                RemoveSpin(1f); 
             }
         }
     }
@@ -108,8 +108,8 @@ public class BaybladeMovement : MonoBehaviour, IBayblade
         else
         {
             spinSpeed -= amount;
-            if (spinSpeed < 0f) spinSpeed = 0f; // clamp
-            healthBar.SetHealth((spinSpeed/maxSpinSpeed)*100); // call TakeDamage from HealthBar
+            if (spinSpeed < 0f) spinSpeed = 0f;
+            healthBar.SetHealth((spinSpeed/maxSpinSpeed)*100); 
         }
     }
 
@@ -118,7 +118,7 @@ public class BaybladeMovement : MonoBehaviour, IBayblade
         RemoveSpin(10f);
     }
 
-    private Vector3 smoothedNormal = Vector3.up; // keeps previous normal
+    private Vector3 smoothedNormal = Vector3.up; 
 
 
 
@@ -137,7 +137,7 @@ public class BaybladeMovement : MonoBehaviour, IBayblade
         }
         else
         {
-            dashSpawnTimer = 0f; // reset timer
+            dashSpawnTimer = 0f; 
         }
     }
 
@@ -145,18 +145,18 @@ public class BaybladeMovement : MonoBehaviour, IBayblade
     {
         if (dashEffectPrefab == null) return;
 
-        // find ground position slightly below the Beyblade
+
         RaycastHit hit;
         Vector3 spawnPos = transform.position + Vector3.down * 0.1f;
 
-        // Raycast to find actual floor contact point
+  
         if (Physics.Raycast(transform.position + Vector3.up * 0.2f, Vector3.down, out hit, 2f))
             spawnPos = hit.point + Vector3.up * 0.05f;
 
         Quaternion rotation = Quaternion.Euler(0, Random.Range(0f, 360f), 0);
         GameObject dashFx = Instantiate(dashEffectPrefab, spawnPos, rotation);
 
-        // auto-destroy when done
+
         var ps = dashFx.GetComponent<ParticleSystem>();
         if (ps != null)
             Destroy(dashFx, ps.main.duration + ps.main.startLifetime.constantMax);
@@ -178,19 +178,19 @@ public class BaybladeMovement : MonoBehaviour, IBayblade
     {
         float deltaY = transform.position.y - lastYPosition;
 
-        // Adjust speed based on slope
+   
         if (Mathf.Abs(deltaY) > 0.001f)
             currentMoveSpeed += -deltaY * speedChangeRate * Time.deltaTime;
 
-        // Smooth return
+    
         currentMoveSpeed = Mathf.Lerp(currentMoveSpeed, baseMoveSpeed, Time.deltaTime * speedReturnRate);
 
-        // Clamp
+       
         float minSpeed = baseMoveSpeed * minSpeedPenalty;
         float maxSpeed = baseMoveSpeed * maxSpeedBoost;
         currentMoveSpeed = Mathf.Clamp(currentMoveSpeed, minSpeed, maxSpeed);
 
-        // Apply sprint
+      
         moveSpeed = currentMoveSpeed;
         if (Input.GetKey(sprintKey))
             moveSpeed *= sprintMultiplier;
@@ -216,7 +216,7 @@ public class BaybladeMovement : MonoBehaviour, IBayblade
             targetNormal = hit.normal;
 
         float tiltSpeed = 10f;
-        if (Vector3.Dot(move, transform.forward) < 0f) tiltSpeed = 20f; // faster when moving backward
+        if (Vector3.Dot(move, transform.forward) < 0f) tiltSpeed = 20f; 
         smoothedNormal = Vector3.Lerp(smoothedNormal, targetNormal, Time.deltaTime * tiltSpeed);
     }
 
@@ -228,7 +228,7 @@ public class BaybladeMovement : MonoBehaviour, IBayblade
         {
             Vector3 slopeMove = Vector3.ProjectOnPlane(move, smoothedNormal).normalized;
             Vector3 tiltAxis = Vector3.Cross(Vector3.up, slopeMove);
-            float tiltAngle = 15f; // adjust for tilt intensity
+            float tiltAngle = 15f;
             Quaternion movementTilt = Quaternion.AngleAxis(tiltAngle, tiltAxis);
 
             Quaternion targetRotation = slopeTilt * movementTilt;
@@ -263,15 +263,15 @@ public class BaybladeMovement : MonoBehaviour, IBayblade
     xRotation -= mouseY;
     xRotation = Mathf.Clamp(xRotation, -80f, 80f);
 
-    // Camera pitch (up/down)
+  
     cameraTransform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
 
-    // Player yaw (left/right)
+   
     transform.Rotate(Vector3.up * mouseX);
 
-    // Clamp camera height relative to Beyblade
+
     Vector3 cameraPos = cameraTransform.localPosition;
-    cameraPos.y = Mathf.Max(cameraPos.y, 0f); // never below 0
+    cameraPos.y = Mathf.Max(cameraPos.y, 0f); 
     cameraTransform.localPosition = cameraPos;
 }
 

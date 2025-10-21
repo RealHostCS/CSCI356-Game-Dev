@@ -88,23 +88,22 @@ namespace MimicSpace
             canCreateLeg = true;
         }
 
-        // Update is called once per frame
+   
         void Update()
         {
             if (!canCreateLeg)
                 return;
 
-            // New leg origin is placed in front of the mimic
+         
             legPlacerOrigin = transform.position + velocity.normalized * newLegRadius;
 
             if (legCount <= maxLegs - partsPerLeg)
             {
-                // Offset The leg origin by a random vector
+            
                 Vector2 offset = Random.insideUnitCircle * newLegRadius;
                 Vector3 newLegPosition = legPlacerOrigin + new Vector3(offset.x, 0, offset.y);
 
-                // If the mimic is moving and the new leg position is behind it, mirror it to make
-                // it reach in front of the mimic.
+          
                 if (velocity.magnitude > 1f)
                 {
                     float newLegAngle = Vector3.Angle(velocity, newLegPosition - transform.position);
@@ -118,7 +117,7 @@ namespace MimicSpace
                 if (Vector3.Distance(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(legPlacerOrigin.x, 0, legPlacerOrigin.z)) < minLegDistance)
                     newLegPosition = ((newLegPosition - transform.position).normalized * minLegDistance) + transform.position;
 
-                // if the angle is too big, adjust the new leg position towards the velocity vector
+        
                 if (Vector3.Angle(velocity, newLegPosition - transform.position) > 45)
                     newLegPosition = transform.position + ((newLegPosition - transform.position) + velocity.normalized * (newLegPosition - transform.position).magnitude) / 2f;
 
@@ -144,7 +143,7 @@ namespace MimicSpace
             }
         }
 
-        // object pooling to limit leg instantiation
+   
         void RequestLeg(Vector3 footPosition, int legResolution, float maxLegDistance, float growCoef, Mimic myMimic, float lifeTime)
         {
             GameObject newLeg;
@@ -163,7 +162,7 @@ namespace MimicSpace
             newLeg.transform.SetParent(myMimic.transform);
 
             legCount++;
-            //Debug.Log("Spawning leg at " + footPosition);
+         
         }
 
         public void RecycleLeg(GameObject leg)
