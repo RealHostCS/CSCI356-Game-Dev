@@ -38,6 +38,9 @@ public class Dying : MonoBehaviour
         {
             ShowDeathScreen();
         }
+        else if (attributes.health <= 0 && attributes.isDead) {
+            ShowDeathScreen();
+        }
     }
 
     public void ShowDeathScreen()
