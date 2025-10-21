@@ -40,7 +40,7 @@ public class UpdatePlayerUI : MonoBehaviour
             numberCount.text = number.ToString();
     }
 
-  )
+
     public void UpdateCollectionWords(string words)
     {
         if (collectionWords != null)
