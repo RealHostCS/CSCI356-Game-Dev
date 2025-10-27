@@ -2,15 +2,12 @@ using UnityEngine;
 
 public class DoorWay : MonoBehaviour
 {
-    public StatTracker statTracker;  // Reference to your StatTracker script
-    public int killsRequired = 3;    // Number of kills needed to open the door
-    public GameObject door;          // Reference to the door object
+    public StatTracker statTracker;   // Reference to your StatTracker script
+    public int killsRequired = 3;     // Number of kills needed to open the door
+    public GameObject door;           // Reference to the door object
+    public GameObject wall;           // Reference to the wall object (optional)
 
     private bool doorOpened = false;
-
-    void Update()
-    {
-    }
 
     void CheckStat()
     {
@@ -28,12 +25,22 @@ public class DoorWay : MonoBehaviour
     void OpenDoor()
     {
         doorOpened = true;
-        Debug.Log("Door opened!");
+        Debug.Log("Door opened! Colliders disabled.");
 
-        // Example: disable the door object
+        // Disable the door's collider (if it has one)
         if (door != null)
         {
-            door.SetActive(false);
+            Collider doorCollider = door.GetComponent<Collider>();
+            if (doorCollider != null)
+                doorCollider.enabled = false;
+        }
+
+        // Disable the wall's collider (optional)
+        if (wall != null)
+        {
+            Collider wallCollider = wall.GetComponent<Collider>();
+            if (wallCollider != null)
+                wallCollider.enabled = false;
         }
     }
 
@@ -41,6 +48,7 @@ public class DoorWay : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            Debug.Log("Yup We know your trying to win ");
             CheckStat();
         }
     }
