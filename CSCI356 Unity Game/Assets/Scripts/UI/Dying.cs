@@ -66,7 +66,6 @@ public class Dying : MonoBehaviour
 
     public void RestartGame()
     {
-        Debug.Log("Restart Log");
         if (gameManager != null)
             gameManager.RestartGame();
         else

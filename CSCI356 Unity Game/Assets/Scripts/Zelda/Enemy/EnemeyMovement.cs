@@ -40,8 +40,6 @@ public class EnemyChaseNavMesh : MonoBehaviour
 
     void Attack()
     {
-        // Play attack animation or deal damage
-        Debug.Log("Attack!");
     }
 
 }

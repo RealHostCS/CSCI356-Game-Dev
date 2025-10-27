@@ -46,15 +46,11 @@ public class CameraItem : MonoBehaviour
         var origin = flashLight != null ? flashLight.transform.position : transform.position;
         var dir    = flashLight != null ? flashLight.transform.forward  : transform.forward;
 
-        Debug.DrawRay(origin, dir * rayDistance, Color.white, 0.25f);
-        Debug.Log("Sending raycast");
-
         if (Physics.Raycast(origin, dir, out RaycastHit hit, rayDistance, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Collide))
         {
             var monster = hit.collider.GetComponent<MonsterStates>() ?? hit.collider.GetComponentInParent<MonsterStates>();
             if (monster != null)
             {
-                Debug.Log("Monster hit by flash!");
                 monster.Stun(3f);
             }
         }
