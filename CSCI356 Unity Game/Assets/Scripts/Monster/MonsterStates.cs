@@ -94,7 +94,6 @@ public class MonsterStates : MonoBehaviour
     {
         if (firstFrameInState)
         {
-            Debug.Log("Entered Angry state!");
             agent.speed = 20;
         }
 
@@ -120,7 +119,6 @@ public class MonsterStates : MonoBehaviour
     {
         if (firstFrameInState)
         {
-            Debug.Log("Entered Scared state!");
             agent.speed = 20;
         }
 
@@ -141,7 +139,6 @@ public class MonsterStates : MonoBehaviour
     {
         if (firstFrameInState)
         {
-            Debug.Log("Entered Attack state!");
             agent.speed = 14;
         }
 
@@ -167,7 +164,6 @@ public class MonsterStates : MonoBehaviour
     {
         if (firstFrameInState)
         {
-            Debug.Log("Entered Hiding state!");
             agent.speed = 14;
             
         }
@@ -182,7 +178,6 @@ public class MonsterStates : MonoBehaviour
     {
         if (firstFrameInState)
         {
-            Debug.Log("Entered Stalk state!");
             agent.speed = 14;
         }
 
@@ -203,7 +198,6 @@ public class MonsterStates : MonoBehaviour
     {
         if (firstFrameInState)
         {
-            Debug.Log("Entered Stunned state!");
             if (agent)
             {
                 agent.velocity = Vector3.zero;
