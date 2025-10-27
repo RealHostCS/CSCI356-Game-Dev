@@ -18,7 +18,7 @@ public class DoorWay : MonoBehaviour
         if (statTracker != null && !doorOpened)
         {
             // Check if enemy kills meet or exceed the requirement
-            if (statTracker.enemyKillCount >= killsRequired)
+            if (statTracker.EnemyKillCount() >= killsRequired)
             {
                 OpenDoor();
             }

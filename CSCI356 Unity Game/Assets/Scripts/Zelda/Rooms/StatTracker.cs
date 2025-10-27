@@ -27,4 +27,9 @@ public class StatTracker : MonoBehaviour
         newRoomNumber = room;
         currentRoomNumber = newRoomNumber;
     }
+
+    public int EnemyKillCount()
+    {
+        return enemysKilled;
+    }
 }
