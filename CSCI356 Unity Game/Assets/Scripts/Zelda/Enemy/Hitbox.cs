@@ -12,8 +12,6 @@ public class Hitbox : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Hit");
-        Debug.Log("Hit Detected on " + other.name);
 
         // Optional: if your enemy still has a script for health
         Enemy enemy = other.GetComponentInParent<Enemy>();

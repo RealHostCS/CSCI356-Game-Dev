@@ -402,8 +402,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f378956567f34749bbf8fcafc4e1f59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 6866022265687852853, guid: 11ba6cd8513922c4cb5dc5ad27f9f2fd, type: 3}
-  agent: {fileID: 1388122371694806778}
   currentMonsterState: 0
 --- !u!114 &310777247758992475
 MonoBehaviour:
@@ -417,7 +415,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef3bc7aa0d941c64f99efa910a4be761, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  director: {fileID: 0}
   playerColision: 0
+  updatePlayerUi: {fileID: 0}
 --- !u!195 &1388122371694806778
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -428,7 +428,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 12
+  m_Speed: 14
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120

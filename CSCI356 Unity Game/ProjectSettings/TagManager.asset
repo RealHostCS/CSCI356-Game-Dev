@@ -9,6 +9,8 @@ TagManager:
   - PauseMain
   - Enemy
   - Pot
+  - Key
+  - UI
   layers:
   - Default
   - TransparentFX

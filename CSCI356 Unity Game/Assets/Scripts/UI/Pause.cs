@@ -38,7 +38,6 @@ public class Pause : MonoBehaviour
 
     public void PauseGame()
     {
-        Debug.Log("Pause triggered!");
 
         if (mouseLookScript != null)
             mouseLookScript.enabled = false;

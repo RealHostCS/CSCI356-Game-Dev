@@ -38,6 +38,9 @@ public class Dying : MonoBehaviour
         {
             ShowDeathScreen();
         }
+        else if (attributes.health <= 0 && attributes.isDead) {
+            ShowDeathScreen();
+        }
     }
 
     public void ShowDeathScreen()
@@ -63,7 +66,6 @@ public class Dying : MonoBehaviour
 
     public void RestartGame()
     {
-        Debug.Log("Restart Log");
         if (gameManager != null)
             gameManager.RestartGame();
         else
